@@ -1,0 +1,2 @@
+class Countory < ApplicationRecord
+end
