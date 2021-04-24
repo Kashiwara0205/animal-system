@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_04_24_135522) do
 
   create_table "countories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

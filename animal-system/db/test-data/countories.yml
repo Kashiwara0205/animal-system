@@ -1,0 +1,7 @@
+TestData:
+  Countory:
+    loop: 300
+    col:
+      name: ["A国", "B国", "C国"]
+    option: 
+      name: ["add_id"]
