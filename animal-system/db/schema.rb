@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_135522) do
+ActiveRecord::Schema.define(version: 2021_04_25_012648) do
 
-  create_table "countories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "animal_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "dogs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "animals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "countories_id", comment: "原産国"
+    t.bigint "animal_types_id"
     t.string "name"
     t.integer "weight"
     t.integer "height"
@@ -27,8 +28,17 @@ ActiveRecord::Schema.define(version: 2021_04_24_135522) do
     t.datetime "updated_at", precision: 6, null: false
     t.column "amount_of_walk", "enum('always','almost','seldom')", null: false
     t.column "body", "enum('small','middle','large')", null: false
-    t.column "hair", "enum('short','long')", null: false
-    t.index ["countories_id"], name: "index_dogs_on_countories_id"
+    t.column "hair", "enum('none','short','long')", null: false
+    t.index ["animal_types_id"], name: "index_animals_on_animal_types_id"
+    t.index ["countories_id"], name: "index_animals_on_countories_id"
   end
 
+  create_table "countories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "animals", "animal_types", column: "animal_types_id"
+  add_foreign_key "animals", "countories", column: "countories_id"
 end

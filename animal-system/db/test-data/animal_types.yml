@@ -1,0 +1,8 @@
+const':
+  list: ["MAMMALS", "BIRDS", "REPTILE", "AMPHIBANS", "INVERTEBRATES", "FISH"]
+
+TestData:
+  AnimalType:
+    loop: <const[:list]>
+    col:
+      name: <const[:list]>

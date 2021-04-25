@@ -1,7 +1,0 @@
-TestData:
-  Dog:
-    loop: 1000
-    col:
-      name: 犬
-    option:
-      name: ["add_id"]

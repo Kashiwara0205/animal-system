@@ -1,0 +1,9 @@
+TestData:
+  Animal:
+    loop: 1000
+    col:
+      name: "動物太郎"
+      animal_types_id: F|AnimalType
+      countories_id: F|Countory
+    option:
+      name: ["add_id"]
