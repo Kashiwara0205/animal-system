@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :elements do 
         get 'animal_types'
+        get 'countories'
       end
     end
   end
