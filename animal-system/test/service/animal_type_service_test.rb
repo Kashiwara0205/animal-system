@@ -2,6 +2,8 @@ require "test_helper"
 require "minitest/autorun"
 
 class AnimalTypeServiceTest < ActiveSupport::TestCase
+  # 期待値: - key, valueの値で要素が帰ってくること
+  #        - repositoryのgetメソッドが叩かれていること
   test "get_selectable_elementsメソッドの動作を担保する" do
     animal_type_record = MiniTest::Mock.new
     animal_type_record.expect :id, 1
