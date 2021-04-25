@@ -14,11 +14,11 @@ class AnimalTypeServiceTest < ActiveSupport::TestCase
 
     service = AnimalTypeService.new(animal_type_repo: animal_type_repo)
 
-    selectable_elements = service.get_selectable_elements()
+    elements = service.get_selectable_elements()
 
-    assert_equal 1, selectable_elements.size
-    assert_equal 1, selectable_elements[0][:key]
-    assert_equal "BIRDS", selectable_elements[0][:value]
+    assert_equal 1, elements.size
+    assert_equal 1, elements[0][:key]
+    assert_equal "BIRDS", elements[0][:value]
 
     animal_type_record.verify
     animal_type_repo.verify
