@@ -1,8 +1,5 @@
-const':
-  list: ["CHILE", "CHINA", "BELIZE", "BENIN", "FRANCE", "GABON", "JAPAN", "INDIA"]
-
 TestData:
   Countory:
-    loop: <const[:list]>
+    loop: 8
     col:
-      name: <const[:list]>
+      name: ["CHILE", "CHINA", "BELIZE", "BENIN", "FRANCE", "GABON", "JAPAN", "INDIA"] 

@@ -1,7 +1,7 @@
 class Api::V1::CountoriesController  < ActionController::Base
 
   # 動作: countoriesのデータが{ key: value }形式で返却されます
-  def countories
+  def index
     begin
       service = CountoryService.new(countory_repo: CountoryRepository)
       render json: service.get_selectable_elements, status: 200

@@ -1,0 +1,11 @@
+preset_path':
+  - ./test/test_data/countories.yml
+  - ./test/test_data/animal_types.yml
+
+Default:
+  Animal:
+    loop: 10
+    col:
+      name: ["犬", "猫", "猿"]
+    option:
+      name: ["add_id"]

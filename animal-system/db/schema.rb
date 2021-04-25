@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2021_04_25_012648) do
   end
 
   create_table "animals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "countories_id", comment: "原産国"
-    t.bigint "animal_types_id"
+    t.bigint "countory_id", comment: "原産国"
+    t.bigint "animal_type_id"
     t.string "name"
     t.integer "weight"
     t.integer "height"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 2021_04_25_012648) do
     t.column "amount_of_walk", "enum('always','almost','seldom')", null: false
     t.column "body", "enum('small','middle','large')", null: false
     t.column "hair", "enum('none','short','long')", null: false
-    t.index ["animal_types_id"], name: "index_animals_on_animal_types_id"
-    t.index ["countories_id"], name: "index_animals_on_countories_id"
+    t.index ["animal_type_id"], name: "index_animals_on_animal_type_id"
+    t.index ["countory_id"], name: "index_animals_on_countory_id"
   end
 
   create_table "countories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -39,6 +39,6 @@ ActiveRecord::Schema.define(version: 2021_04_25_012648) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "animals", "animal_types", column: "animal_types_id"
-  add_foreign_key "animals", "countories", column: "countories_id"
+  add_foreign_key "animals", "animal_types"
+  add_foreign_key "animals", "countories"
 end
