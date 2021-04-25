@@ -6,6 +6,6 @@ class CountoryService
   def get_selectable_elements
     records = @countory_repo.get
 
-    records.map{|m| { key: m.id, value: m.name }}
+    records.map{|m| { key: m.id, value: Const::COUNTORY_TO_JA[ m.name ] }}
   end
 end

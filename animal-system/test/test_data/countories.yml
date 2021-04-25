@@ -1,5 +1,5 @@
 const':
-  list: ["CHILE", "CHINA", "BELIZE", "BENIN", "FRENCH", "GABON", "JAPAN", "INDIA"]
+  list: ["CHILE", "CHINA", "BELIZE", "BENIN", "FRANCE", "GABON", "JAPAN", "INDIA"]
 
 TestData:
   Countory:

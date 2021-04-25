@@ -14,7 +14,7 @@ class CountoryRepositoryTest < ActiveSupport::TestCase
     assert_equal "BENIN", records[1].name
     assert_equal "CHILE", records[2].name
     assert_equal "CHINA", records[3].name
-    assert_equal "FRENCH", records[4].name
+    assert_equal "FRANCE", records[4].name
     assert_equal "GABON", records[5].name
     assert_equal "INDIA", records[6].name
     assert_equal "JAPAN", records[7].name

@@ -18,7 +18,7 @@ class CountoryServiceTest < ActiveSupport::TestCase
 
     assert_equal 1, elements.size
     assert_equal 1, elements[0][:key]
-    assert_equal "JAPAN", elements[0][:value]
+    assert_equal "日本", elements[0][:value]
 
     countory_record.verify
     countory_repo.verify
