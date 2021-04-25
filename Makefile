@@ -10,3 +10,6 @@ migration:
 	sudo docker exec -ti animal-system rails db:create
 	sudo docker exec -ti animal-system rails db:migrate:reset
 	sudo docker exec -ti animal-system rails db:seed
+
+test:
+	sudo docker exec -ti animal-system rails t
