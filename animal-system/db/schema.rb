@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2021_04_25_012648) do
     t.integer "height"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.column "amount_of_walk", "enum('always','almost','seldom')", null: false
     t.column "body", "enum('small','middle','large')", null: false
     t.column "hair", "enum('none','short','long')", null: false
     t.index ["animal_type_id"], name: "index_animals_on_animal_type_id"

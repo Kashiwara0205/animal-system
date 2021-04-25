@@ -1,5 +1,5 @@
 TestData:
   Countory:
-    loop: 8
+    loop: <TestData::Const::COUNTORY>
     col:
-      name: ["CHILE", "CHINA", "BELIZE", "BENIN", "FRANCE", "GABON", "JAPAN", "INDIA"] 
+      name: <TestData::Const::COUNTORY>

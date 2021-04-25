@@ -1,5 +1,5 @@
 TestData:
   AnimalType:
-    loop: 6
+    loop: <TestData::Const::ANIMAL_TYPE>
     col:
-      name: ["MAMMALS", "BIRDS", "REPTILE", "AMPHIBANS", "INVERTEBRATES", "FISH"]
+      name: <TestData::Const::ANIMAL_TYPE>
