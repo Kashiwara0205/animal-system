@@ -1,8 +1,9 @@
 import Vue from 'vue/dist/vue.esm.js'
+import Animals from "../components/animals/animals"
 
 new Vue({
   el: '#animals',
-  data:{
-    title: "動物情報 一覧"
+  components: {
+    "animals": Animals
   }
 });
