@@ -9,4 +9,6 @@ Rails.application.routes.draw do
       resources :countories, only: [:index] 
     end
   end
+
+  resources :animals, only: [:index] 
 end
