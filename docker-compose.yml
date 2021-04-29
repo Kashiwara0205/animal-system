@@ -10,7 +10,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql-data:/var/lib/mysql
-  animal-system:
+  animal-system: &copy-animal-system
     build: ./animal-system
     container_name: animal-system
     command: rails s -p 3000 -b '0.0.0.0'
@@ -22,6 +22,16 @@ services:
       - db
     stdin_open: true
     tty: true
+  webpack:
+    <<: *copy-animal-system
+    command: "bin/webpack-dev-server"
+    container_name: webpack
+    ports:
+      - "3035:3035"
+    depends_on:
+      - animal-system
+    tty: false
+    stdin_open: false
 volumes:
   mysql-data:
     driver: local

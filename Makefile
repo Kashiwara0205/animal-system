@@ -4,6 +4,12 @@ reboot:
 	sudo docker-compose down
 	sudo docker-compose up
 
+build:
+	sudo docker-compose build
+
+down:
+	sudo docker-compose down
+
 in:
 	sudo docker exec -ti animal-system /bin/bash
 
