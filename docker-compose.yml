@@ -10,6 +10,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql-data:/var/lib/mysql
+      
   animal-system: &copy-animal-system
     build: ./animal-system
     container_name: animal-system
@@ -22,6 +23,7 @@ services:
       - db
     stdin_open: true
     tty: true
+
   webpack:
     <<: *copy-animal-system
     command: "bin/webpack-dev-server"
@@ -32,6 +34,7 @@ services:
       - animal-system
     tty: false
     stdin_open: false
+
 volumes:
   mysql-data:
     driver: local
