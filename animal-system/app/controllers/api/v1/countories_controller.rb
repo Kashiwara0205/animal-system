@@ -1,5 +1,4 @@
-class Api::V1::CountoriesController  < ActionController::Base
-
+class Api::V1::CountoriesController < ActionController::Base
   # 動作: countoriesのデータが{ key: value }形式で返却されます
   def index
     begin

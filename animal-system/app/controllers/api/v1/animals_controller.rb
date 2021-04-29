@@ -1,5 +1,4 @@
-class Api::V1::AnimalsController  < ActionController::Base
-
+class Api::V1::AnimalsController < ActionController::Base
   def index
     begin
       service = AnimalService.new(animal_repo: AnimalRepository)

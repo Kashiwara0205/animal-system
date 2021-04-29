@@ -1,0 +1,33 @@
+AsciiComments:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Naming:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Lint/EmptyFile:
+  Enabled: false
+
+Style:
+  Enabled: false
+
+AllCops:
+  Include:
+    - app/**/*
+  Exclude:
+    - app/assets/**/*
+    - app/javascript/**/*
+    - app/views/**/*
+    - test/**/*
+    - db/schema.rb
+    - config/**/*
+    - tmp/**/*
+    - bin/**/*

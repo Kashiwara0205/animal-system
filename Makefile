@@ -10,6 +10,9 @@ build:
 down:
 	sudo docker-compose down
 
+autocorrect:
+	sudo docker exec -ti animal-system rubocop -a
+
 rubocop:
 	sudo docker exec -ti animal-system rubocop
 
