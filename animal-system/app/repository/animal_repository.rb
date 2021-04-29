@@ -16,5 +16,9 @@ class AnimalRepository
               .ransack(query)
               .result
     end
+
+    def get_count query: query
+      Animal.ransack(query).result.size
+    end
   end
 end

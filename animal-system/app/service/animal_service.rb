@@ -5,7 +5,10 @@ class AnimalService
 
   def get limit:, offset:, query:
     records = @animal_repo.get(limit: limit, offset: offset, query: query)
+    count = @animal_repo.get_count(query: query)
 
-    records.map{|m| m.attributes }
+    info = records.map{|m| m.attributes }
+
+    [info, count]
   end
 end

@@ -152,4 +152,18 @@ class AnimalRepositoryTest < ActiveSupport::TestCase
     records = AnimalRepository.get(limit: 10, offset: 0, query: query)
     assert_equal 3, records.size
   end
+
+  # 期待値: 想定するcount値と一致すること
+  test "get_countメソッドを担保する" do 
+    Pokotarou.execute("./test/test_data/animals.yml")
+
+    count = AnimalRepository.get_count( query: {})
+    assert_equal 10, count
+
+    count = AnimalRepository.get_count( query: { countory_id_eq: 1 })
+    assert_equal 0, count
+
+    count = AnimalRepository.get_count( query: { body_eq: "large"  })
+    assert_equal 2, count
+  end
 end
