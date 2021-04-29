@@ -5,19 +5,14 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import Animal from "../../model/animal"
 
-export default {
-  props:{
-    model: Animal
-  },
-  data: function () {
-    return {
-      title: "動物情報 一覧"
-    }
-  },
+@Component
+export default class List extends Vue {
+  @Prop({ required: true }) model: Animal
 
-  created: function(){
+  created(){
     console.log(this.model.getListUrl())
   }
 }

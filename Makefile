@@ -14,3 +14,6 @@ migration:
 
 test:
 	sudo docker exec -ti animal-system rails t
+
+yarn:
+	sudo docker exec -ti animal-system yarn install
