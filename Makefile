@@ -21,5 +21,8 @@ migration:
 test:
 	sudo docker exec -ti animal-system rails t
 
+jest:
+	sudo docker exec -ti animal-system yarn jest test/javascript
+
 yarn:
 	sudo docker exec -ti animal-system yarn install
