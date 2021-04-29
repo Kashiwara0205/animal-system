@@ -1,4 +1,5 @@
 reboot:
+	rm -rf animal-system/tmp/pids/server.pid
 	sudo docker system prune -f
 	sudo docker-compose down
 	sudo docker-compose up

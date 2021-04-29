@@ -6,6 +6,12 @@ Default:
   Animal:
     loop: 10
     col:
+      animal_type_id: [1, 2, 3, 4]
+      countory_id: [2, 3, 4, 5]
       name: ["犬", "猫", "猿"]
+      weight: [10,23, 45, 100, 21, 1]
+      height: [111,222,11,12, 33, 23]
+      body: ['small', 'middle', 'large', 'middle']
+      hair: ['none', 'short', 'long', 'none']
     option:
       name: ["add_id"]

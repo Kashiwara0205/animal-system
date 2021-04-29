@@ -1,3 +1,3 @@
 class Countory < ApplicationRecord
-  has_one :animal
+  has_many :animal
 end

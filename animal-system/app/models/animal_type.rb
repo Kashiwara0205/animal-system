@@ -1,3 +1,3 @@
 class AnimalType < ApplicationRecord
-  has_one :animal
+  has_many :animal
 end
