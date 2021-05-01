@@ -12,7 +12,6 @@
     <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
     <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
     <el-table-column label="体毛" prop="hair" :formatter="formatHair"></el-table-column>
-    <el-table-column label="大きさ(種別)" prop="body" :formatter="formatBody"> </el-table-column>
     <el-table-column label="登録日時" prop="created_at"> </el-table-column>
     <el-table-column label="更新日時" prop="updated_at"> </el-table-column>
   </el-table>
@@ -55,14 +54,6 @@ export default class List extends Vue {
       "none": "無し",
       "short": "短め",
       "long": "長め"
-    }[value]
-  }
-
-  private formatBody(row, col, value, index){
-    return {
-      "small": "小さい",
-      "middle": "中くらい",
-      "large": "大きい"
     }[value]
   }
 }
