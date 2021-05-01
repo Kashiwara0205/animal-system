@@ -12,6 +12,13 @@
   </head>
 
   <body>
+    <div id="header">
+      <animal-system-header></animal-system-header>
+    </div>
+
     <%= yield %>
+
+    <%= javascript_pack_tag 'header' %>
+    <%= stylesheet_pack_tag 'header'  %> 
   </body>
 </html>

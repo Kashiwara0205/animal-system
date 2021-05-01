@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     end
   end
 
+  root 'top#index'
   resources :animals, only: [:index] 
 end
