@@ -1,3 +1,3 @@
-class AnimalsController < ActionController::Base
+class AnimalsController < ApplicationController
   def index; end
 end
