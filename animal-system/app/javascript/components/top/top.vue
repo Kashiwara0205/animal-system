@@ -1,6 +1,6 @@
 <template>
   <div id="base">
-    <h1> {{ title }} </h1>
+    <h1> {{ title }} <i class="el-icon-s-tools"></i></h1>
     <infomation-panel></infomation-panel>
     <br>
     ※ 新機能や設計の実験用に開発している架空の企業の社内システムです
