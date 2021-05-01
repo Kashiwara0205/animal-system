@@ -4,9 +4,6 @@ import Header from "../components/header/header"
 
 new Vue({
   el: '#header',
-  data: {
-    message: 'Hello Vue!'
-  },
   components: {
     "animal-system-header": Header
   }
