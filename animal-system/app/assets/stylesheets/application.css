@@ -19,3 +19,8 @@ body{
 }
 
 
+.el-table__body-wrapper {
+  overflow: hidden;
+  position: relative;
+  background-color: #f5f5f3;
+}
