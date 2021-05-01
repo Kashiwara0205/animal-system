@@ -3,13 +3,16 @@ class AnimalRepository
     def get limit:, offset:, query:
       Animal.joins(:animal_type)
             .joins(:countory)
-            .select("animals.name",
+            .select("animals.id",
+                    "animals.name",
                     "animals.weight",
                     "animals.height",
                     "animals.body",
                     "animals.hair",
-                    "animal_types.name",
-                    "countories.name")
+                    "animals.created_at",
+                    "animals.updated_at",
+                    "animal_types.name as type_name",
+                    "countories.name as countory_name")
             .limit(limit)
             .offset(offset)
             .order(:id)
