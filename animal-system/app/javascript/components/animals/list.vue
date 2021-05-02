@@ -3,7 +3,8 @@
     <el-table
       :data="info"
       height="500"
-      v-loading="fetchLoading"
+      v-loading="loading"
+      element-loading-text="Loading..."
       border
       style="width: 100%;">
       <el-table-column label="動物名" prop="name"></el-table-column>
@@ -31,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import WrapSelect from "../utils/wrap-select.vue"
@@ -47,7 +48,7 @@ Vue.use(ElementUI);
 })
 export default class List extends Vue {
   @Prop({ required: true }) info
-  @Prop({ required: true }) fetchLoading
+  @Prop({ required: true }) loading
   @Prop({ required: true }) animalTypeList
   @Prop({ required: true }) countoryList
 

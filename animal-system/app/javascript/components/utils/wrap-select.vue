@@ -8,7 +8,7 @@
     <!-- クリックされたらoptionありで描画。
          描画コスト削減のためにクリックされるまでoptionは描画しない-->
     <div v-show="clicked">
-      <el-select v-model="rowValue" :blur="true" placeholder="Select" ref="elSelect">
+      <el-select v-model="rowValue" placeholder="Select" ref="elSelect">
         <div v-if="clicked">
           <el-option
             v-for="item in selectList"
