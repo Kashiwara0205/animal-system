@@ -3,14 +3,31 @@
     <div v-if="completeInit">
       <h1 style="padding-left: 15px;"> <i class="el-icon-document"></i> {{ title }} </h1>
 
-      <pagination v-bind:offset.sync="offset" :total="total" @fetchInfo="fetchInfo" disp-message> </pagination>
+      <el-tabs type="border-card">
+      <el-tab-pane>
+        <span slot="label"><i class="el-icon-document"></i> 一覧表示</span>
+        <pagination v-bind:offset.sync="offset" :total="total" @fetchInfo="fetchInfo" disp-message> </pagination>
+        <list :info="info" 
+              :loading="loading" 
+              :animal-type-list="animalTypeList" 
+              :countory-list="countoryList" >
+        </list>
+      </el-tab-pane>
+      <el-tab-pane class="panel">  
+        <span slot="label"><i class="el-icon-warning"></i> 権限情報</span>
+        <b> 種類更新機能  </b> <b style="color:red"> [ 操作可能 ] </b>
+        <li> 部署「事務」に所属する者は可能 </li>
+        <li> 職位「リーダー」以上の権限を持つ者は可能 </li>
 
-      <list :info="info" 
-            :loading="loading" 
-            :animal-type-list="animalTypeList" 
-            :countory-list="countoryList" >
-      </list>
-
+        <br>
+        <b> 原産国更新機能 </b> <b style="color:red"> [ 操作可能 ] </b>
+        <li> 部署「事務」に所属する者は可能 </li>
+        <li> 職位「リーダー」以上の権限を持つ者は可能 </li>
+        <br>
+        <b> 体毛更新機能 </b>
+        <li> ○○さんのみ可能 </li>
+      </el-tab-pane>
+    </el-tabs>
     </div>
   </div>
 </template>
@@ -106,4 +123,8 @@ export default class Animals extends Vue {
 </script>
 
 <style scoped>
+.panel{
+  overflow: scroll; 
+  height: 500px;
+}
 </style>
