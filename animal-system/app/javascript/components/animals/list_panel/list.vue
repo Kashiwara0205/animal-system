@@ -35,9 +35,9 @@
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import WrapSelect from "../utils/wrap-select.vue"
-import utils from "../../lib/utils"
-import { HAIR_LIST } from "../../const"
+import WrapSelect from "../../utils/wrap-select.vue"
+import utils from "../../../lib/utils"
+import { HAIR_LIST } from "../../../const"
 import moment from 'moment/moment'
 
 Vue.use(ElementUI);

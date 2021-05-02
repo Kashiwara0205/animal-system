@@ -5,5 +5,5 @@ new Vue({
   el: '#animals',
   components: {
     "animals": Animals
-  }
+  },
 });

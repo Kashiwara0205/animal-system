@@ -1,23 +1,24 @@
 <template>
   <div id="base" v-loading.fullscreen.lock="!completeInit" element-loading-text="Loading...">
     <div v-if="completeInit">
-      <h1 style="padding-left: 15px;"> <i class="el-icon-document"></i> {{ title }} </h1>
+      <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1>
 
-      <el-tabs type="border-card">
-        <el-tab-pane>
-          <span slot="label"><i class="el-icon-document"></i> 一覧表示</span>
-          <pagination v-bind:offset.sync="offset" :total="total" @fetchInfo="fetchInfo" disp-message> </pagination>
-          <list :info="info" 
-                :loading="loading" 
-                :animal-type-list="animalTypeList" 
-                :countory-list="countoryList" >
-          </list>
-        </el-tab-pane>
-        <el-tab-pane class="panel">
-          <span slot="label"><i class="el-icon-warning"></i> 権限表示</span>
-          <authentication-list></authentication-list>
-        </el-tab-pane>
-      </el-tabs>
+      <search-panel v-bind.sync="query"
+        @search="fetchInfo"
+        v-bind:offset.sync="offset"
+      >
+      </search-panel>
+
+      <list-panel
+        @fetchInfo="fetchInfo"
+        :info = "info"
+        :loading = "loading"
+        :animalTypeList = "animalTypeList"
+        :countoryList = "countoryList"
+        :total = "total"
+        v-bind:offset.sync="offset"
+      >
+      </list-panel>
       
     </div>
   </div>
@@ -25,8 +26,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import List from "../animals/list.vue"
-import AuthenticationList from "../animals/authentication_list.vue"
+import SearchPanel from "../animals/search_panel/search_panel.vue"
+import ListPanel from "../animals/list_panel/list_panel.vue"
 import Pagination from "../utils/pagination.vue"
 import Animal from "../../model/animal"
 import AnimalType from "../../model/animal_type"
@@ -37,9 +38,8 @@ import utils from "../../lib/utils"
 
 @Component({
   components:{ 
-    list: List,
-    "authentication-list": AuthenticationList,
-    pagination: Pagination
+    "list-panel": ListPanel,
+    "search-panel": SearchPanel,
   }
 })
 export default class Animals extends Vue {
@@ -55,7 +55,9 @@ export default class Animals extends Vue {
 
   private total = 0
   private offset = 0
-  private query = {}
+  private query = {
+    name_cont: ""
+  }
 
   private loading = false
   private completeInit = false
@@ -100,12 +102,16 @@ export default class Animals extends Vue {
     this.loading = true
 
     try{
+
+      console.log(this.query)
       const url = this.animal.getListUrl()
       const params = { offset: this.offset, limit: 50, query: this.query }
 
       const res = await http.get(url, params);
       this.info = res["data"]["info"]
       this.total = res["data"]["count"]
+
+      console.log(this.total)
     }catch(e){
       notifier.notifyError(this)
     }finally{
@@ -119,5 +125,11 @@ export default class Animals extends Vue {
 .panel{
   overflow: scroll; 
   height: 500px;
+}
+
+.title{
+  padding-left: 15px; 
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>

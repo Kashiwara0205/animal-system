@@ -2,6 +2,10 @@ class Api::V1::AnimalsController < ActionController::Base
   def index
     begin
       service = AnimalService.new(animal_repo: AnimalRepository)
+
+      puts "xxxxxxxxxxx"
+      puts params[:query]
+      puts "xxxxxxxxx"
       info, count = service.get(limit: params[:limit], offset: params[:offset], query: params[:query])
 
       render json: { info: info, count: count }, status: 200
