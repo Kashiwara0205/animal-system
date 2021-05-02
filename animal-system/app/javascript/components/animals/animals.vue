@@ -2,12 +2,15 @@
   <div id="base" v-loading.fullscreen.lock="!completeInit" element-loading-text="Loading...">
     <div v-if="completeInit">
       <h1 style="padding-left: 15px;"> <i class="el-icon-document"></i> {{ title }} </h1>
-      <pagination v-bind:offset.sync="offset" :total="total" @fetchInfo="fetchInfo"> </pagination>
+
+      <pagination v-bind:offset.sync="offset" :total="total" @fetchInfo="fetchInfo" disp-message> </pagination>
+
       <list :info="info" 
             :loading="loading" 
             :animal-type-list="animalTypeList" 
             :countory-list="countoryList" >
       </list>
+
     </div>
   </div>
 </template>

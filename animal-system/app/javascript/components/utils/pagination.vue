@@ -1,6 +1,6 @@
 <template>
   <div id="animal-system-pagination"> 
-    <p style="padding-left: 10px; margin: 5px;"> {{ total }}件のうち{{offset}}~{{nextOffset}}件を表示 </p>
+    <p v-if="dispMessage" style="padding-left: 10px; margin: 5px;"> {{ total }}件のうち{{offset}}~{{nextOffset}}件を表示 </p>
     <el-pagination
       layout="prev, pager, next"
       @current-change="currentChange"
@@ -20,6 +20,7 @@ Vue.use(ElementUI);
 
 @Component
 export default class List extends Vue {
+  @Prop({ type: Boolean }) dispMessage
   @Prop({ required: true }) offset
   @Prop({ required: true }) total
 
