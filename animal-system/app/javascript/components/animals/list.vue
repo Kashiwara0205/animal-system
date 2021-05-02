@@ -25,8 +25,8 @@
           <wrap-select :toLabelHash="hairToLabel" :rowValue="scope.row.hair" :select-list="hairList" ></wrap-select>
         </template>
       </el-table-column>
-      <el-table-column label="登録日時" prop="created_at"> </el-table-column>
-      <el-table-column label="更新日時" prop="updated_at"> </el-table-column>
+      <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
+      <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetime"> </el-table-column>
     </el-table> 
   </div>
 </template>
@@ -38,6 +38,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import WrapSelect from "../utils/wrap-select.vue"
 import utils from "../../lib/utils"
 import { HAIR_LIST } from "../../const"
+import moment from 'moment/moment'
 
 Vue.use(ElementUI);
 
@@ -79,6 +80,10 @@ export default class List extends Vue {
   private formatCountory(row, col, value, index){
     if (value in this.countoryToLabel) { return this.countoryToLabel[value] }
     return value
+  }
+
+  private formatDatetime(row, col, value, index){
+    return moment(value).format("YYYY-MM-DD HH:mm")
   }
 }
 </script>
