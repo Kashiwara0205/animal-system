@@ -7,7 +7,7 @@
       text-color="#fff"
       active-text-color="#ffd04b">
       <el-menu-item index="/" style="padding-right: 30px">
-        <b>動物事業管理システム</b>
+       <i class="el-icon-s-tools"></i> <b>動物事業管理システム</b>
       </el-menu-item>
       <el-submenu index="animals"> 
         <template slot="title">動物関連</template>

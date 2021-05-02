@@ -1,8 +1,12 @@
 <template>
-  <div id="base">
-    <h1 style="padding-left: 15px;"> {{ title }} </h1>
+  <div id="base" v-if="completeInit">
+    <h1 style="padding-left: 15px;"> <i class="el-icon-document"></i> {{ title }} </h1>
     <pagination v-bind:offset.sync="offset" :total="total" @fetchInfo="fetchInfo"> </pagination>
-    <list :info="info" :loading="loading" :animal-type-to-ja="animalTypeToJa" :countory-list-to-ja="countoryListToJa" ></list>
+    <list :info="info" 
+          :fetch-loading="loading" 
+          :animal-type-list="animalTypeList" 
+          :countory-list="countoryList" >
+    </list>
   </div>
 </template>
 
@@ -34,19 +38,18 @@ export default class Animals extends Vue {
   private animalTypeList = []
   private countoryList = []
 
-  private animalTypeToJa = {}
-  private countoryListToJa = {}
-
   private total = 0
   private offset = 0
   private query = {}
+
   private loading = false
+  private completeInit = false
 
   created(){ this.fetchInitInfo() }
 
   // 初期描画の時のみ使用
   async fetchInitInfo(){
-    this.loading = true
+    this.completeInit = false
 
     try{
       const url = this.animal.getListUrl()
@@ -69,12 +72,10 @@ export default class Animals extends Vue {
       this.animalTypeList = res[1]["data"]
       this.countoryList = res[2]["data"]
 
-      this.animalTypeToJa = utils.createNameToJaNameHash( this.animalTypeList )
-      this.countoryListToJa = utils.createNameToJaNameHash( this.countoryList )
-
     }catch(e){
       notifier.notifyError(this)
     }finally{
+      this.completeInit = true
       this.loading = false
     }
   }

@@ -1,21 +1,32 @@
 <template>
   <div id="list">
-  <el-table
-    :data="info"
-    height="500"
-    v-loading="loading"
-    border
-    style="width: 100%;">
-    <el-table-column label="動物名" prop="name"></el-table-column>
-    <el-table-column label="種類" prop="type_name" :formatter="formatAnimalType"></el-table-column>
-    <el-table-column label="原産国" prop="countory_name" :formatter="formatCountory"></el-table-column>
-    <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
-    <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
-    <el-table-column label="体毛" prop="hair" :formatter="formatHair"></el-table-column>
-    <el-table-column label="登録日時" prop="created_at"> </el-table-column>
-    <el-table-column label="更新日時" prop="updated_at"> </el-table-column>
-  </el-table>
-    
+    <el-table
+      :data="info"
+      height="500"
+      v-loading="fetchLoading"
+      border
+      style="width: 100%;">
+      <el-table-column label="動物名" prop="name"></el-table-column>
+      <el-table-column label="種類" :formatter="formatAnimalType">
+        <template slot-scope="scope">
+          <wrap-select :toLabelHash="animalTypeToLabel" :rowValue="scope.row.type_name" :select-list="animalTypeList" ></wrap-select>
+        </template>
+      </el-table-column>
+      <el-table-column label="原産国" prop="countory_name" :formatter="formatCountory">
+        <template slot-scope="scope">
+          <wrap-select :toLabelHash="countoryToLabel" :rowValue="scope.row.countory_name" :select-list="countoryList" ></wrap-select>
+        </template>
+      </el-table-column>
+      <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
+      <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
+      <el-table-column label="体毛" prop="hair">
+        <template slot-scope="scope">
+          <wrap-select :toLabelHash="hairToLabel" :rowValue="scope.row.hair" :select-list="hairList" ></wrap-select>
+        </template>
+      </el-table-column>
+      <el-table-column label="登録日時" prop="created_at"> </el-table-column>
+      <el-table-column label="更新日時" prop="updated_at"> </el-table-column>
+    </el-table> 
   </div>
 </template>
 
@@ -23,15 +34,33 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import WrapSelect from "../utils/wrap-select.vue"
+import utils from "../../lib/utils"
+import { HAIR_LIST } from "../../const"
 
 Vue.use(ElementUI);
 
-@Component
+@Component({
+  components:{ 
+    "wrap-select": WrapSelect
+  }
+})
 export default class List extends Vue {
   @Prop({ required: true }) info
-  @Prop({ required: true }) loading
-  @Prop({ required: true }) animalTypeToJa
-  @Prop({ required: true }) countoryListToJa
+  @Prop({ required: true }) fetchLoading
+  @Prop({ required: true }) animalTypeList
+  @Prop({ required: true }) countoryList
+
+  private hairList = HAIR_LIST
+
+  private animalTypeToLabel = {}
+  private countoryToLabel = {}
+  private hairToLabel = utils.createValueToLabelHash( HAIR_LIST )
+
+  created(){
+   this.animalTypeToLabel = utils.createValueToLabelHash( this.animalTypeList )
+   this.countoryToLabel = utils.createValueToLabelHash( this.countoryList )
+  }
 
   private formatHeight(row, col, value, index){
     return `${value}cm`
@@ -42,26 +71,16 @@ export default class List extends Vue {
   }
 
   private formatAnimalType(row, col, value, index){
-    return this.animalTypeToJa[value]
+    if (value in this.animalTypeToLabel) { return this.animalTypeToLabel[value] }
+    return value
   }
 
   private formatCountory(row, col, value, index){
-    return this.countoryListToJa[value]
-  }
-
-  private formatHair(row, col, value, index){
-    return {
-      "none": "無し",
-      "short": "短め",
-      "long": "長め"
-    }[value]
+    if (value in this.countoryToLabel) { return this.countoryToLabel[value] }
+    return value
   }
 }
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
 </style>
