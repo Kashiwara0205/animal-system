@@ -103,7 +103,6 @@ export default class SearchPanel extends Vue {
   }
 
   updateParentQuery(){
-    console.log(this.query)
     Object.keys(this.query).forEach(key => this.$emit(`update:${key}`, this.query[key]))
   }
 }

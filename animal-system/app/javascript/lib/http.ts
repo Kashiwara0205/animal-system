@@ -18,7 +18,6 @@ function createConfig(params){
 export default{
   get(url, params){
     const config = createConfig(params) as any
-    console.log(config)
     return axios.get(url, config);
   },
 

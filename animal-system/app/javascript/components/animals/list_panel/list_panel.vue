@@ -3,9 +3,13 @@
     <el-tabs type="border-card">
       <el-tab-pane>
         <span slot="label"><i class="el-icon-document"></i> 一覧表示</span>
+
+        <el-checkbox v-model="editMode" style="padding-left: 15px; padding-bottom: 15px;"> 編集モード</el-checkbox>
+
         <pagination v-bind:offset.sync="offset" :total="total" @fetchInfo="fetchInfo" disp-message> </pagination>
         <list :info="info" 
-              :loading="loading" 
+              :editMode="editMode"
+              :fetchLoading="loading" 
               :animal-type-list="animalTypeList" 
               :countory-list="countoryList" >
         </list>
@@ -38,6 +42,8 @@ export default class Table extends Vue {
   @Prop({ required: true }) countoryList
   @Prop({ required: true }) total
   @Prop({ required: true }) offset
+
+  private editMode = false
 
   private fetchInfo(){ 
     this.$emit('update:offset', this.offset)

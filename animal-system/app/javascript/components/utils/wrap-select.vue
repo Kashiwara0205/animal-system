@@ -1,24 +1,13 @@
 <template>
   <div id="wrap-select"> 
-    <!-- クリックされていなかったらoptionなしで描画 -->
-    <div v-if="!clicked">
-      <el-select @focus="onClick" :value="label">
-      </el-select>
-    </div>
-    <!-- クリックされたらoptionありで描画。
-         描画コスト削減のためにクリックされるまでoptionは描画しない-->
-    <div v-show="clicked">
-      <el-select v-model="value" placeholder="Select" ref="elSelect">
-        <div v-if="clicked">
-          <el-option
-            v-for="item in selectList"
-            :key="item.label"
-            :label="item.label"
-            :value="item[itemName]">
-          </el-option>
-        </div>
-      </el-select>
-    </div>
+    <el-select v-model="value" placeholder="Select" filterable ref="elSelect">
+      <el-option
+        v-for="item in selectList"
+        :key="item.label"
+        :label="item.label"
+        :value="item[itemName]">
+      </el-option>
+    </el-select>
   </div>
 </template>
 
@@ -31,26 +20,9 @@ Vue.use(ElementUI);
 
 @Component
 export default class WrapSelect extends Vue {
-  @Prop() toLabelHash
   @Prop() value
   @Prop() selectList
   @Prop() itemName
-
-  private clicked = false
-
-  get label(){
-    if (this.value in this.toLabelHash) { return this.toLabelHash[this.value] }
-    return this.value
-  }
-
-  private onClick(){
-    this.clicked = true
-    const elem = this.$refs.elSelect as any
-    // クリックされたら、option付きで描画する方のセレクトボックスを展開する
-    const input = elem.$el.querySelector('.el-input__inner');
-    input.click()
-  }
-  
 }
 </script>
 
