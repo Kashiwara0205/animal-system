@@ -17,7 +17,7 @@ class AnimalTypeServiceTest < ActiveSupport::TestCase
     elements = service.get_selectable_elements()
 
     assert_equal 1, elements.size
-    assert_equal 1, elements[0][:key]
+    assert_equal 1, elements[0][:id]
     assert_equal "鳥類", elements[0][:label]
     assert_equal "BIRDS", elements[0][:value]
 

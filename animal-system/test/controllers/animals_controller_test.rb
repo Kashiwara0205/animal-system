@@ -64,13 +64,13 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
 
     assert_equal 10, count
 
-    assert_equal "犬_0", info[0]["name"]
+    assert_equal "犬_0",  info[0]["name"]
     assert_equal 10,      info[0]["weight"]
     assert_equal 111,     info[0]["height"]
     assert_equal "small", info[0]["body"]
     assert_equal "none",  info[0]["hair"]
-    assert_equal "MAMMALS",  info[0]["type_name"]
-    assert_equal "CHINA",  info[0]["countory_name"]
+    assert_equal 1,       info[0]["animal_type_id"]
+    assert_equal 2,       info[0]["countory_id"]
   end
 
   # 期待値: - エラー内容のー返却 
