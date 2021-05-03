@@ -57,6 +57,7 @@ export default class Animals extends Vue {
 
   private total = 0
   private offset = 0
+
   private query = {
     name_cont: "",
     animal_type_id_eq: "",
@@ -67,10 +68,10 @@ export default class Animals extends Vue {
   private loading = false
   private completeInit = false
 
-  created(){ this.fetchInitInfo() }
+  created(){ this.fetchInitialInfo() }
 
   // 初期描画の時のみ使用
-  async fetchInitInfo(){
+  async fetchInitialInfo(){
     this.completeInit = false
 
     try{
@@ -107,16 +108,12 @@ export default class Animals extends Vue {
     this.loading = true
 
     try{
-
-      console.log(this.query)
       const url = this.animal.getListUrl()
       const params = { offset: this.offset, limit: 50, query: this.query }
 
       const res = await http.get(url, params);
       this.info = res["data"]["info"]
       this.total = res["data"]["count"]
-
-      console.log(this.total)
     }catch(e){
       notifier.notifyError(this)
     }finally{

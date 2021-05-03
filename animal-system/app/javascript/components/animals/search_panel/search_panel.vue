@@ -5,10 +5,10 @@
         <span slot="label"><i class="el-icon-search"></i> 検索フォーム</span>
         <el-row :gutter="20">
 
-          <el-col :span="5"> <el-input placeholder="動物名" v-model="name_cont"></el-input> </el-col>
+          <el-col :span="5"> <el-input placeholder="動物名" v-model="query.name_cont"></el-input> </el-col>
 
           <el-col :span="5"> 
-            <el-select v-model="animal_type_id_eq" placeholder="種類">
+            <el-select v-model="query.animal_type_id_eq" placeholder="種類">
               <el-option
                 v-for="item in animalTypeList"
                 :key="item.id"
@@ -19,7 +19,7 @@
           </el-col>
 
           <el-col :span="5"> 
-            <el-select v-model="countory_id_eq" placeholder="原産国">
+            <el-select v-model="query.countory_id_eq" placeholder="原産国">
               <el-option
                 v-for="item in countoryList"
                 :key="item.id"
@@ -30,7 +30,7 @@
           </el-col>
 
           <el-col :span="5"> 
-            <el-select v-model="hair_eq" placeholder="体毛">
+            <el-select v-model="query.hair_eq" placeholder="体毛">
               <el-option
                 v-for="item in hairList"
                 :key="item.label"
@@ -61,39 +61,35 @@ export default class SearchPanel extends Vue {
   @Prop({ required: true }) animalTypeList
   @Prop({ required: true }) countoryList
 
-  private name_cont = ""
-  private animal_type_id_eq = ""
-  private countory_id_eq = ""
-  private hair_eq = ""
-
+  private query = this.createNewQuery()
   private hairList = HAIR_LIST
 
-  onSearch(){
-    this.$emit('update:name_cont', this.name_cont)
-    this.$emit('update:animal_type_id_eq', this.animal_type_id_eq)
-    this.$emit('update:countory_id_eq', this.countory_id_eq)
+  createNewQuery(){
+    return {
+      name_cont: "",
+      animal_type_id_eq: "",
+      countory_id_eq: "",
+      hair_eq: ""
+    }
+  }
 
-    this.$emit('update:hair_eq', this.hair_eq)
+  onSearch(){
+    this.updateParentQuery()
 
     this.$emit('update:offset', 0)
     this.$emit("search")
   }
 
   onClear(){
-    this.name_cont = ""
-    this.$emit('update:name_cont', "")
-
-    this.animal_type_id_eq = ""
-    this.$emit('update:animal_type_id_eq', "")
-
-    this.countory_id_eq = ""
-    this.$emit('update:countory_id_eq', "")
-
-    this.hair_eq = ""
-    this.$emit('update:hair_eq', "")
-
+    this.query = this.createNewQuery()
+    this.updateParentQuery()
+    
     this.$emit('update:offset', 0)
     this.$emit("search")
+  }
+
+  updateParentQuery(){
+    Object.keys(this.query).forEach(key => this.$emit(`update:${key}`, this.query[key]))
   }
 }
 </script>
