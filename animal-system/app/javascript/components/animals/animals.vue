@@ -136,7 +136,7 @@ export default class Animals extends Vue {
 
 .title{
   padding-left: 15px; 
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 </style>

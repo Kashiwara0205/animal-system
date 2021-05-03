@@ -57,4 +57,5 @@ export default class Table extends Vue {
   overflow: scroll; 
   height: 500px;
 }
+
 </style>
