@@ -51,6 +51,27 @@
       </el-row>
 
       <br>
+
+      <el-row :gutter="20">
+        <el-col :span="5">
+          <el-date-picker
+            v-model="query.created_at_gteq"
+            type="datetime"
+            placeholder="登録日時(以降)">
+          </el-date-picker>
+        </el-col>
+
+        <el-col :span="5"> 
+          <el-date-picker
+            v-model="query.updated_at_gteq"
+            type="datetime"
+            placeholder="更新日時(以降)">
+          </el-date-picker>
+         </el-col>  
+      </el-row>
+      
+      <br>
+
       <el-button type="primary" @click="onSearch"> 検索 </el-button>
       <el-button @click="onClear"> クリア </el-button>
       </el-tab-pane>
@@ -83,7 +104,9 @@ export default class SearchPanel extends Vue {
       weight_gteq: "",
       weight_lteq: "",
       height_gteq: "",
-      height_lteq: ""
+      height_lteq: "",
+      created_at_gteq: "",
+      updated_at_gteq: ""
     }
   }
 

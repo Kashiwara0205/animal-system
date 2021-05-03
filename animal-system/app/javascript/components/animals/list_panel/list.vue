@@ -1,50 +1,50 @@
 <template>
   <div id="list" >
-      <el-table
-        :data="animals"
-        @hook:mounted="complete"
-        height="500"
-        v-loading="tableLoading"
-        element-loading-text="Loading..."
-        border
-        style="width: 100%;">
-        <el-table-column label="動物名" prop="name"></el-table-column>
-        <el-table-column label="種類">
-          <template slot-scope="scope">
-            <div v-if="editMode">
-              <wrap-select :value="scope.row.animal_type_id" itemName="id" :selectList="animalTypeList"></wrap-select>
-            </div>
-            <div v-else>
-              {{ formatAnimalType(scope.row.animal_type_id) }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="原産国">
-          <template slot-scope="scope">
-             <div v-if="editMode">
-              <wrap-select :value="scope.row.countory_id" itemName="id" :selectList="countoryList"></wrap-select>
-            </div>
-            <div v-else>
-              {{ formatCountory(scope.row.countory_id) }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
-        <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
-        <el-table-column label="体毛">
-          <template slot-scope="scope">
-            <div v-if="editMode">
-              <wrap-select :value="scope.row.hair" itemName="value" :selectList="hairList"></wrap-select>
-            </div>
-            <div v-else>
-              {{ formatHair(scope.row.hair) }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
-        <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetime"> </el-table-column>
-      </el-table> 
-    </div>
+    <el-table
+      :data="animals"
+      @hook:mounted="complete"
+      height="500"
+      v-loading="tableLoading"
+      element-loading-text="Loading..."
+      border
+      style="width: 100%;">
+      <el-table-column label="動物名" prop="name"></el-table-column>
+      <el-table-column label="種類">
+        <template slot-scope="scope">
+          <div v-if="editMode">
+            <wrap-select :value="scope.row.animal_type_id" itemName="id" :selectList="animalTypeList"></wrap-select>
+          </div>
+          <div v-else>
+            {{ formatAnimalType(scope.row.animal_type_id) }}
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="原産国">
+        <template slot-scope="scope">
+           <div v-if="editMode">
+            <wrap-select :value="scope.row.countory_id" itemName="id" :selectList="countoryList"></wrap-select>
+          </div>
+          <div v-else>
+            {{ formatCountory(scope.row.countory_id) }}
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
+      <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
+      <el-table-column label="体毛">
+        <template slot-scope="scope">
+          <div v-if="editMode">
+            <wrap-select :value="scope.row.hair" itemName="value" :selectList="hairList"></wrap-select>
+          </div>
+          <div v-else>
+            {{ formatHair(scope.row.hair) }}
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
+      <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetime"> </el-table-column>
+    </el-table> 
+  </div>
 </template>
 
 <script lang="ts">

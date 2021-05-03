@@ -66,7 +66,9 @@ export default class Animals extends Vue {
     weight_gteq: "",
     weight_lteq: "",
     height_gteq: "",
-    height_lteq: ""
+    height_lteq: "",
+    created_at_gteq: "",
+    updated_at_gteq: ""
   }
 
   private loading = false

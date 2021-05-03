@@ -160,7 +160,6 @@ class AnimalRepositoryTest < ActiveSupport::TestCase
     records = AnimalRepository.get(limit: 10, offset: 0, query: query)
     assert_equal 3, records.size
 
-
     query = { countory_id_eq_any: [2, 3] }
     records = AnimalRepository.get(limit: 10, offset: 0, query: query)
     assert_equal 6, records.size
@@ -178,5 +177,39 @@ class AnimalRepositoryTest < ActiveSupport::TestCase
 
     count = AnimalRepository.get_count( query: { body_eq: "large"  })
     assert_equal 2, count
+  end
+
+  # 期待値: 想定するレコードのヒット件数と一致すること
+  test "登録日時の検索に関して担保する" do 
+    Pokotarou.execute("./test/test_data/animals.yml")
+
+    query = { created_at_gteq: "2021-04-01 16:00" }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 6, records.size
+
+    query = { created_at_gteq: "2021-03-01 16:00" }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 10, records.size
+
+    query = { created_at_gteq: "2021-06-01 16:00" }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 0, records.size
+  end
+
+  # 期待値: 想定するレコードのヒット件数と一致すること
+  test "更新日時の検索に関して担保する" do 
+    Pokotarou.execute("./test/test_data/animals.yml")
+
+    query = { updated_at_gteq: "2021-05-01 16:00" }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 6, records.size
+
+    query = { updated_at_gteq: "2021-04-01 16:00" }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 10, records.size
+
+    query = { updated_at_gteq: "2021-07-01 16:00" }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 0, records.size
   end
 end
