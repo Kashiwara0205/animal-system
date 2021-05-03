@@ -212,4 +212,40 @@ class AnimalRepositoryTest < ActiveSupport::TestCase
     records = AnimalRepository.get(limit: 10, offset: 0, query: query)
     assert_equal 0, records.size
   end
+
+  # 期待値: 期待する内容で更新されること
+  test "更新機能をテスト" do
+    Pokotarou.execute("./test/test_data/animals.yml")
+
+    record = Animal.find(1)
+    assert_equal "犬_0", record.name
+    assert_equal 10, record.weight
+    assert_equal 111, record.height
+    assert_equal "none", record.hair
+
+    AnimalRepository.update(id: 1, info: {
+      name: "update-name",
+      weight: 0,
+      height: 0,
+      hair: "short"
+    })
+
+    record = Animal.find(1)
+    assert_equal "update-name", record.name
+    assert_equal 0, record.weight
+    assert_equal 0, record.height
+    assert_equal "short", record.hair
+  end
+
+  # 期待値: 期待しているレコード1件の取得
+  test "findメソッドを担保" do
+    Pokotarou.execute("./test/test_data/animals.yml")
+
+    record = AnimalRepository.find(id: 1)
+    assert_equal "犬_0", record.name
+    assert_equal 10, record.weight
+    assert_equal 111, record.height
+    assert_equal "none", record.hair
+  end
+
 end

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  # API
   namespace :api, format: 'json' do
     namespace :v1 do
-      resources :animals, only: [:index] 
+      resource :animals,  only: [:update]
+      resources :animals, only: [:index]
       namespace :animals do 
         get 'animal_types'
       end
@@ -10,6 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # Index
   root 'top#index'
   resources :animals, only: [:index] 
 end

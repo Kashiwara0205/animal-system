@@ -20,6 +20,15 @@ class AnimalRepository
             .result
     end
 
+    def find id:
+      Animal.find(id)
+    end
+
+    def update id:, info:
+      record = Animal.find(id)
+      record.update!(info)
+    end
+
     def get_count query:
       Animal.ransack(query).result.size
     end

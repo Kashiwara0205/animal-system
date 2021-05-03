@@ -88,4 +88,63 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
       assert_equal "DummyError", res["error"]
     end
   end
+
+  # 期待値: - 期待する内容でデータが更新されること
+  #        - status-code 200
+  test "put /api/v1/animals アクションでデータを更新する" do 
+    Pokotarou.execute("./test/test_data/animals.yml")
+
+    params =  { 
+      id: 1, 
+      animal: {
+        name: "update-name",
+        weight: 0,
+        height: 0,
+        hair: "short"
+      } 
+    }
+
+    put "/api/v1/animals", params: params
+
+    assert_response 200
+
+    res = JSON.parse(response.body)
+    assert_equal "update-name", res["updated_record"]["name"]
+    assert_equal 0, res["updated_record"]["weight"]
+    assert_equal 0, res["updated_record"]["height"]
+    assert_equal "short", res["updated_record"]["hair"]
+
+    record = Animal.find(1)
+    assert_equal "update-name", record.name
+    assert_equal 0, record.weight
+    assert_equal 0, record.height
+    assert_equal "short", record.hair
+  end
+
+  # 期待値: - エラー内容のー返却 
+  #        - status-code 500
+  test "put /api/v1/animals アクションでエラーが発生したら500が発生することを担保" do
+    Pokotarou.execute("./test/test_data/animals.yml")
+
+    mock = MiniTest::Mock.new
+    mock.expect(:update, []) do raise StandardError.new('DummyError'); end
+
+    AnimalService.stub(:new, mock) do 
+
+      params =  { 
+        id: 1, 
+        animal: {
+          name: "update-name",
+          weight: 0,
+          height: 0,
+          hair: "short"
+        } 
+      }
+
+      put "/api/v1/animals", params: params
+      assert_response 500
+      res = JSON.parse(response.body)
+      assert_equal "DummyError", res["error"]
+    end
+  end
 end

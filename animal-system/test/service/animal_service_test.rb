@@ -24,4 +24,24 @@ class AnimalServiceTest < ActiveSupport::TestCase
     animal_record.verify
     animal_repo.verify
   end
+
+  # 期待値: idとinfoがupdateメソッドに渡っていること
+  test "updateメソッドの動作を担保する" do 
+    animal_record = MiniTest::Mock.new
+    animal_record.expect :attributes, { id: 1, name: "xxx" }
+
+    animal_repo = MiniTest::Mock.new
+    animal_repo.expect :update, true, [{id: 1, info: { id: 1, name: "xxx" } }]
+    animal_repo.expect :find, animal_record, [{id: 1}]
+
+    service = AnimalService.new(animal_repo: animal_repo)
+
+    record = service.update(id: 1, info: { id: 1, name: "xxx" })
+
+    assert_equal 1,  record[:id]
+    assert_equal "xxx", record[:name]
+
+    animal_repo.verify
+    animal_record.verify
+  end
 end

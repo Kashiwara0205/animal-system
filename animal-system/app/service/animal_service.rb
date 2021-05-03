@@ -11,4 +11,9 @@ class AnimalService
 
     [info, count]
   end
+
+  def update id:, info:
+    @animal_repo.update(id: id, info: info)
+    @animal_repo.find(id: id).attributes
+  end
 end
