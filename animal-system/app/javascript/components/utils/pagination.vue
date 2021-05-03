@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -30,6 +30,11 @@ export default class List extends Vue {
     const nextOffset = this.currentPage * 50
     if(this.total < nextOffset){ return this.total }
     return nextOffset
+  }
+
+  @Watch('offset')
+  resetCurrentPage(val) {
+    if(0 === val){ this.currentPage = 1 }
   }
 
   currentChange(idx){

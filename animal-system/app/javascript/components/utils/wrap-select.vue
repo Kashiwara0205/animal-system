@@ -8,13 +8,13 @@
     <!-- クリックされたらoptionありで描画。
          描画コスト削減のためにクリックされるまでoptionは描画しない-->
     <div v-show="clicked">
-      <el-select v-model="rowValue" placeholder="Select" ref="elSelect">
+      <el-select v-model="value" placeholder="Select" ref="elSelect">
         <div v-if="clicked">
           <el-option
             v-for="item in selectList"
-            :key="item.value"
+            :key="item.label"
             :label="item.label"
-            :value="item.value">
+            :value="item[itemName]">
           </el-option>
         </div>
       </el-select>
@@ -32,14 +32,15 @@ Vue.use(ElementUI);
 @Component
 export default class WrapSelect extends Vue {
   @Prop() toLabelHash
-  @Prop() rowValue
+  @Prop() value
   @Prop() selectList
+  @Prop() itemName
 
   private clicked = false
 
   get label(){
-    if (this.rowValue in this.toLabelHash) { return this.toLabelHash[this.rowValue] }
-    return this.rowValue
+    if (this.value in this.toLabelHash) { return this.toLabelHash[this.value] }
+    return this.value
   }
 
   private onClick(){

@@ -8,7 +8,7 @@ class AnimalTypeService
 
     records.map { |m|
       name = m.name 
-      { key: m.id, value: name, label: AnimalTypeConst::NAME_TO_JA[name] } 
+      { id: m.id, value: name, label: AnimalTypeConst::NAME_TO_JA[name] } 
     }
   end
 end

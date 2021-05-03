@@ -8,7 +8,7 @@ class CountoryService
 
     records.map { |m| 
       name = m.name
-      { key: m.id, value: name, label: CountoryConst::NAME_TO_JA[name] } 
+      { id: m.id, value: name, label: CountoryConst::NAME_TO_JA[name] } 
     }
   end
 end

@@ -10,19 +10,19 @@
       <el-table-column label="動物名" prop="name"></el-table-column>
       <el-table-column label="種類" :formatter="formatAnimalType">
         <template slot-scope="scope">
-          <wrap-select :toLabelHash="animalTypeToLabel" :rowValue="scope.row.type_name" :select-list="animalTypeList" ></wrap-select>
+          <wrap-select :toLabelHash="animalTypeToLabel" itemName="id" :value="scope.row.animal_type_id" :select-list="animalTypeList" ></wrap-select>
         </template>
       </el-table-column>
       <el-table-column label="原産国" prop="countory_name" :formatter="formatCountory">
         <template slot-scope="scope">
-          <wrap-select :toLabelHash="countoryToLabel" :rowValue="scope.row.countory_name" :select-list="countoryList" ></wrap-select>
+          <wrap-select :toLabelHash="countoryToLabel" itemName="id" :value="scope.row.countory_id" :select-list="countoryList" ></wrap-select>
         </template>
       </el-table-column>
       <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
       <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
       <el-table-column label="体毛" prop="hair">
         <template slot-scope="scope">
-          <wrap-select :toLabelHash="hairToLabel" :rowValue="scope.row.hair" :select-list="hairList" ></wrap-select>
+          <wrap-select :toLabelHash="hairToLabel" itemName="value" :value="scope.row.hair" :select-list="hairList" ></wrap-select>
         </template>
       </el-table-column>
       <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
@@ -60,8 +60,8 @@ export default class List extends Vue {
   private hairToLabel = utils.createValueToLabelHash( HAIR_LIST )
 
   created(){
-   this.animalTypeToLabel = utils.createValueToLabelHash( this.animalTypeList )
-   this.countoryToLabel = utils.createValueToLabelHash( this.countoryList )
+   this.animalTypeToLabel = utils.createIdToLabelHash( this.animalTypeList )
+   this.countoryToLabel = utils.createIdToLabelHash( this.countoryList )
   }
 
   private formatHeight(row, col, value, index){

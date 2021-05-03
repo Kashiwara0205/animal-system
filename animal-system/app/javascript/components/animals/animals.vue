@@ -5,6 +5,8 @@
 
       <search-panel v-bind.sync="query"
         @search="fetchInfo"
+        :animalTypeList = "animalTypeList"
+        :countoryList = "countoryList"
         v-bind:offset.sync="offset"
       >
       </search-panel>
@@ -56,7 +58,10 @@ export default class Animals extends Vue {
   private total = 0
   private offset = 0
   private query = {
-    name_cont: ""
+    name_cont: "",
+    animal_type_id_eq: "",
+    countory_id_eq: "",
+    hair_eq: ""
   }
 
   private loading = false

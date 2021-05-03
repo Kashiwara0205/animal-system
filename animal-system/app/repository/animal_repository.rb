@@ -11,8 +11,8 @@ class AnimalRepository
                     "animals.hair",
                     "animals.created_at",
                     "animals.updated_at",
-                    "animal_types.name as type_name",
-                    "countories.name as countory_name")
+                    "animal_types.id as animal_type_id",
+                    "countories.id as countory_id")
             .limit(limit)
             .offset(offset)
             .order(:id)
