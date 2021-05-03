@@ -14,14 +14,29 @@ class CountoriesControllerTest  < ActionDispatch::IntegrationTest
 
     assert_equal 8, res.size
 
-    assert_equal "ベリーズ", res[0]["value"]
-    assert_equal "ベナン", res[1]["value"]
-    assert_equal "チリ", res[2]["value"]
-    assert_equal "中国", res[3]["value"]
-    assert_equal "フランス", res[4]["value"]
-    assert_equal "ガボン", res[5]["value"]
-    assert_equal "インド", res[6]["value"]
-    assert_equal "日本", res[7]["value"]
+    assert_equal "ベリーズ", res[0]["label"]
+    assert_equal "BELIZE", res[0]["value"]
+
+    assert_equal "ベナン", res[1]["label"]
+    assert_equal "BENIN", res[1]["value"]
+
+    assert_equal "チリ", res[2]["label"]
+    assert_equal "CHILE", res[2]["value"]
+
+    assert_equal "中国", res[3]["label"]
+    assert_equal "CHINA", res[3]["value"]
+
+    assert_equal "フランス", res[4]["label"]
+    assert_equal "FRANCE", res[4]["value"]
+
+    assert_equal "ガボン", res[5]["label"]
+    assert_equal "GABON", res[5]["value"]
+
+    assert_equal "インド", res[6]["label"]
+    assert_equal "INDIA", res[6]["value"]
+
+    assert_equal "日本", res[7]["label"]
+    assert_equal "JAPAN", res[7]["value"]
   end
 
   # 期待値: - エラー内容のー返却 

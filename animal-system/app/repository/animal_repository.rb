@@ -1,10 +1,6 @@
 class AnimalRepository
   class << self
     def get limit:, offset:, query:
-      puts "00000000000000000"
-      print query
-      puts
-      puts "--------------"
       Animal.joins(:animal_type)
             .joins(:countory)
             .select("animals.id",

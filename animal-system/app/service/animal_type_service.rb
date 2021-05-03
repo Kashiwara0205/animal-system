@@ -6,6 +6,9 @@ class AnimalTypeService
   def get_selectable_elements
     records = @animal_type_repo.get
 
-    records.map { |m| { key: m.id, value: m.name, label: AnimalTypeConst::NAME_TO_JA[m.name] } }
+    records.map { |m|
+      name = m.name 
+      { key: m.id, value: name, label: AnimalTypeConst::NAME_TO_JA[name] } 
+    }
   end
 end
