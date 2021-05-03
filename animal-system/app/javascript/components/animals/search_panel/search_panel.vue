@@ -8,7 +8,7 @@
           <el-col :span="5"> <el-input placeholder="動物名" v-model="query.name_cont"></el-input> </el-col>
 
           <el-col :span="5"> 
-            <el-select v-model="query.animal_type_id_eq" placeholder="種類">
+            <el-select v-model="query.animal_type_id_eq_any" filterable multiple placeholder="種類">
               <el-option
                 v-for="item in animalTypeList"
                 :key="item.id"
@@ -19,7 +19,7 @@
           </el-col>
 
           <el-col :span="5"> 
-            <el-select v-model="query.countory_id_eq" placeholder="原産国">
+            <el-select v-model="query.countory_id_eq_any" filterable multiple placeholder="原産国">
               <el-option
                 v-for="item in countoryList"
                 :key="item.id"
@@ -30,7 +30,7 @@
           </el-col>
 
           <el-col :span="5"> 
-            <el-select v-model="query.hair_eq" placeholder="体毛">
+            <el-select v-model="query.hair_eq_any" filterable multiple placeholder="体毛">
               <el-option
                 v-for="item in hairList"
                 :key="item.label"
@@ -77,9 +77,9 @@ export default class SearchPanel extends Vue {
   createNewQuery(){
     return {
       name_cont: "",
-      animal_type_id_eq: "",
-      countory_id_eq: "",
-      hair_eq: "",
+      animal_type_id_eq_any: [],
+      countory_id_eq_any: [],
+      hair_eq_any: [],
       weight_gteq: "",
       weight_lteq: "",
       height_gteq: "",
@@ -103,6 +103,7 @@ export default class SearchPanel extends Vue {
   }
 
   updateParentQuery(){
+    console.log(this.query)
     Object.keys(this.query).forEach(key => this.$emit(`update:${key}`, this.query[key]))
   }
 }

@@ -117,6 +117,10 @@ class AnimalRepositoryTest < ActiveSupport::TestCase
     query = { hair_eq: "long" }
     records = AnimalRepository.get(limit: 10, offset: 0, query: query)
     assert_equal 2, records.size
+
+    query = { hair_eq_any: ["long", "short"] }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 5, records.size
   end
 
   # 期待値: 想定するレコードのヒット件数と一致すること
@@ -134,6 +138,10 @@ class AnimalRepositoryTest < ActiveSupport::TestCase
     query = { animal_type_id_eq: 3 }
     records = AnimalRepository.get(limit: 10, offset: 0, query: query)
     assert_equal 2, records.size
+
+    query = { animal_type_id_eq_any: [1, 3] }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 5, records.size
   end
 
   # 期待値: 想定するレコードのヒット件数と一致すること
@@ -151,6 +159,11 @@ class AnimalRepositoryTest < ActiveSupport::TestCase
     query = { countory_id_eq: 3 }
     records = AnimalRepository.get(limit: 10, offset: 0, query: query)
     assert_equal 3, records.size
+
+
+    query = { countory_id_eq_any: [2, 3] }
+    records = AnimalRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 6, records.size
   end
 
   # 期待値: 想定するcount値と一致すること

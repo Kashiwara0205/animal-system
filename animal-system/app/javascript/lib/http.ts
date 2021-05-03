@@ -6,7 +6,10 @@ function createConfig(params){
     method: 'get',
     params: params,
     paramsSerializer(params) {
-      return qs.stringify(params)
+      return qs.stringify(params,{
+        arrayFormat: "brackets",
+        encode: false
+      })
     },
     responseType: 'json'
   }
@@ -15,6 +18,7 @@ function createConfig(params){
 export default{
   get(url, params){
     const config = createConfig(params) as any
+    console.log(config)
     return axios.get(url, config);
   },
 

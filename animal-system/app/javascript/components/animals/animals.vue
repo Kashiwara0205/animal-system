@@ -60,9 +60,9 @@ export default class Animals extends Vue {
 
   private query = {
     name_cont: "",
-    animal_type_id_eq: "",
-    countory_id_eq: "",
-    hair_eq: "",
+    animal_type_id_eq_any: [],
+    countory_id_eq_any: [],
+    hair_eq_any: [],
     weight_gteq: "",
     weight_lteq: "",
     height_gteq: "",
@@ -114,7 +114,6 @@ export default class Animals extends Vue {
     try{
       const url = this.animal.getListUrl()
       const params = { offset: this.offset, limit: 50, query: this.query }
-
       const res = await http.get(url, params);
       this.info = res["data"]["info"]
       this.total = res["data"]["count"]
