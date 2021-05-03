@@ -62,7 +62,11 @@ export default class Animals extends Vue {
     name_cont: "",
     animal_type_id_eq: "",
     countory_id_eq: "",
-    hair_eq: ""
+    hair_eq: "",
+    weight_gteq: "",
+    weight_lteq: "",
+    height_gteq: "",
+    height_lteq: ""
   }
 
   private loading = false

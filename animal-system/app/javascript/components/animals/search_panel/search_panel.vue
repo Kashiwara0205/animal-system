@@ -40,6 +40,16 @@
             </el-select>
           </el-col>
       </el-row>
+
+      <br>
+
+      <el-row :gutter="20">
+        <el-col :span="5"> <el-input placeholder="体重(以上)" v-model="query.weight_gteq"></el-input> </el-col>
+        <el-col :span="5"> <el-input placeholder="体重(以下)" v-model="query.weight_lteq"></el-input> </el-col>
+        <el-col :span="5"> <el-input placeholder="身長(以上)" v-model="query.height_gteq"></el-input> </el-col>
+        <el-col :span="5"> <el-input placeholder="身長(以下)" v-model="query.height_lteq"></el-input> </el-col>
+      </el-row>
+
       <br>
       <el-button type="primary" @click="onSearch"> 検索 </el-button>
       <el-button @click="onClear"> クリア </el-button>
@@ -69,7 +79,11 @@ export default class SearchPanel extends Vue {
       name_cont: "",
       animal_type_id_eq: "",
       countory_id_eq: "",
-      hair_eq: ""
+      hair_eq: "",
+      weight_gteq: "",
+      weight_lteq: "",
+      height_gteq: "",
+      height_lteq: ""
     }
   }
 
@@ -83,7 +97,7 @@ export default class SearchPanel extends Vue {
   onClear(){
     this.query = this.createNewQuery()
     this.updateParentQuery()
-    
+
     this.$emit('update:offset', 0)
     this.$emit("search")
   }
