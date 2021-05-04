@@ -15,7 +15,8 @@
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :editMode="editMode"
-            v-bind:name.sync="scope.row.name">
+            v-bind:name.sync="scope.row.name"
+            v-bind:updatedAt.sync="scope.row.updated_at">
           >
           </animal-name>
         </template>
@@ -29,7 +30,8 @@
             :animal-type-to-label="animalTypeToLabel"
             :editMode="editMode"
             :animal-type-list="animalTypeList"
-            v-bind:animalTypeId.sync="scope.row.animal_type_id">
+            v-bind:animalTypeId.sync="scope.row.animal_type_id"
+            v-bind:updatedAt.sync="scope.row.updated_at">
           </animal-type>
         </template>
       </el-table-column>
@@ -42,7 +44,8 @@
             :countory-to-label="countoryToLabel"
             :editMode="editMode"
             :countory-list="countoryList"
-            v-bind:countoryId.sync="scope.row.countory_id">
+            v-bind:countoryId.sync="scope.row.countory_id"
+            v-bind:updatedAt.sync="scope.row.updated_at">
           </countory>
         </template>
       </el-table-column>
@@ -53,7 +56,8 @@
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :editMode="editMode"
-            v-bind:weight.sync="scope.row.weight">
+            v-bind:weight.sync="scope.row.weight"
+            v-bind:updatedAt.sync="scope.row.updated_at">
           >
           </weight>
         </template>
@@ -65,7 +69,8 @@
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :editMode="editMode"
-            v-bind:height.sync="scope.row.height">
+            v-bind:height.sync="scope.row.height"
+            v-bind:updatedAt.sync="scope.row.updated_at">
           >
           </height>
         </template>
@@ -79,7 +84,8 @@
             :hair-to-label="hairToLabel"
             :editMode="editMode"
             :hair-list="hairList"
-            v-bind:hair.sync="scope.row.hair">
+            v-bind:hair.sync="scope.row.hair"
+            v-bind:updatedAt.sync="scope.row.updated_at">
           </hair>
         </template>
       </el-table-column>

@@ -43,7 +43,7 @@ export default class Hair extends Vue {
       const res = await http.put(this.url, params)
       const record = res.data.updated_record
       this.$emit('update:hair', record["hair"] )
-
+      this.$emit('update:updatedAt', record["updated_at"] )
       notifier.notifySuccess(this, {title: "更新成功", message: "体毛を更新しました"})
     }catch(e){
       notifier.notifyError(this)

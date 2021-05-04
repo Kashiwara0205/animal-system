@@ -43,7 +43,7 @@ export default class AnimalType extends Vue {
       const res = await http.put(this.url, params)
       const record = res.data.updated_record
       this.$emit('update:animalTypeId', record["animal_type_id"] )
-
+      this.$emit('update:updatedAt', record["updated_at"] )
       notifier.notifySuccess(this, {title: "更新成功", message: "種類を更新しました"})
     }catch(e){
       notifier.notifyError(this)
