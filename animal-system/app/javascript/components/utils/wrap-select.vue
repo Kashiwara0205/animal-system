@@ -1,6 +1,6 @@
 <template>
   <div id="wrap-select"> 
-    <el-select v-model="value" placeholder="Select" filterable ref="elSelect">
+    <el-select v-model="wrapSelectValue" @change="onChage" placeholder="Select" filterable ref="elSelect">
       <el-option
         v-for="item in selectList"
         :key="item.label"
@@ -23,6 +23,16 @@ export default class WrapSelect extends Vue {
   @Prop() value
   @Prop() selectList
   @Prop() itemName
+
+  private wrapSelectValue = ""
+
+  created(){
+    this.wrapSelectValue = this.value
+  }
+
+  onChage(val){
+    this.$emit("change", val)
+  }
 }
 </script>
 

@@ -120,6 +120,9 @@ export default class SearchPanel extends Vue {
   onClear(){
     this.query = this.createNewQuery()
     this.updateParentQuery()
+
+    this.$emit('update:offset', 0)
+    this.$emit("search")
   }
 
   updateParentQuery(){

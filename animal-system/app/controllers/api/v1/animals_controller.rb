@@ -1,4 +1,5 @@
-class Api::V1::AnimalsController < ActionController::Base
+class Api::V1::AnimalsController < ApiController
+  protect_from_forgery with: :null_session
   def index
     begin
       service = AnimalService.new(animal_repo: AnimalRepository)
@@ -16,7 +17,7 @@ class Api::V1::AnimalsController < ActionController::Base
       updated_record = {}
       ActiveRecord::Base.transaction do
         service = AnimalService.new(animal_repo: AnimalRepository)
-        updated_record = service.update(id: params[:id], info: animal_params)
+        updated_record = service.update(id: params[:id], info: animal_params(params[:update_info]))
       end
 
       render json: { updated_record: updated_record }, status: 200
@@ -27,7 +28,6 @@ class Api::V1::AnimalsController < ActionController::Base
     end
   end
 
-  # 動作: animal_typesのデータが{ key: value }形式で返却されます
   def animal_types
     begin
       service = AnimalTypeService.new(animal_type_repo: AnimalTypeRepository)
@@ -39,7 +39,7 @@ class Api::V1::AnimalsController < ActionController::Base
   end
 
   private
-  def animal_params
-    params[:animal].permit(:countory_id, :animal_type_id, :name, :weight, :height, :hair)
+  def animal_params info
+    info.permit(:countory_id, :animal_type_id, :name, :weight, :height, :hair)
   end
 end

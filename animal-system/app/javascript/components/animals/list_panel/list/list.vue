@@ -11,34 +11,38 @@
       <el-table-column label="動物名" prop="name"></el-table-column>
       <el-table-column label="種類">
         <template slot-scope="scope">
-          <div v-if="editMode">
-            <wrap-select :value="scope.row.animal_type_id" itemName="id" :selectList="animalTypeList"></wrap-select>
-          </div>
-          <div v-else>
-            {{ formatAnimalType(scope.row.animal_type_id) }}
-          </div>
+          <animal-type 
+            :id="scope.row.id"
+            :url="animalModel.getUpdateUrl()"
+            :animal-type-to-label="animalTypeToLabel"
+            :editMode="editMode"
+            :animal-type-list="animalTypeList"
+            v-bind:animalTypeId.sync="scope.row.animal_type_id">
+          </animal-type>
         </template>
       </el-table-column>
       <el-table-column label="原産国">
         <template slot-scope="scope">
-           <div v-if="editMode">
-            <wrap-select :value="scope.row.countory_id" itemName="id" :selectList="countoryList"></wrap-select>
-          </div>
-          <div v-else>
-            {{ formatCountory(scope.row.countory_id) }}
-          </div>
+          <countory 
+            :url="animalModel.getUpdateUrl()"
+            :countory-to-label="countoryToLabel"
+            :editMode="editMode"
+            :countory-list="countoryList"
+            :countory-id="scope.row.countory_id">
+          </countory>
         </template>
       </el-table-column>
       <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
       <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
       <el-table-column label="体毛">
         <template slot-scope="scope">
-          <div v-if="editMode">
-            <wrap-select :value="scope.row.hair" itemName="value" :selectList="hairList"></wrap-select>
-          </div>
-          <div v-else>
-            {{ formatHair(scope.row.hair) }}
-          </div>
+          <hair 
+            :url="animalModel.getUpdateUrl()"
+            :hair-to-label="hairToLabel"
+            :editMode="editMode"
+            :hair-list="hairList"
+            :hair="scope.row.hair">
+          </hair>
         </template>
       </el-table-column>
       <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
@@ -51,19 +55,23 @@
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import WrapSelect from "../../utils/wrap-select.vue"
-import utils from "../../../lib/utils"
-import { HAIR_LIST } from "../../../const"
+import AnimalType from "../update_component/animal_type.vue"
+import Countory from "../update_component/countory.vue"
+import Hair from "../update_component/hair.vue"
+import utils from "../../../../lib/utils"
+import { HAIR_LIST } from "../../../../const"
 import moment from 'moment/moment'
-
 Vue.use(ElementUI);
 
 @Component({
   components:{ 
-    "wrap-select": WrapSelect
+    "animal-type": AnimalType,
+    "countory": Countory,
+    "hair": Hair
   }
 })
 export default class List extends Vue {
+  @Prop({ required: true }) animalModel
   @Prop({ required: true }) info
   @Prop({ required: true }) editMode
   @Prop({ required: true }) fetchLoading
@@ -91,37 +99,21 @@ export default class List extends Vue {
     return `${value}kg`
   }
 
-  private formatAnimalType(value){
-    if (value in this.animalTypeToLabel) { return this.animalTypeToLabel[value] }
-    return value
-  }
-
-  private formatCountory(value){
-    if (value in this.countoryToLabel) { return this.countoryToLabel[value] }
-    return value
-  }
-
-  private formatHair(value){
-    if (value in this.hairToLabel) { return this.hairToLabel[value] }
-    return value
-  }
-
   // 編集モードに切り替わった後にlazyLoadを作動
   @Watch("editMode")
-  private complete(){
-    this.lazyLoad()
+  private change(){
+    this.lazyLoad(JSON.parse(JSON.stringify(this.animals)))
   }
 
   // fetchのloading処理が終わった後にlazyLoadを作動
   @Watch("fetchLoading")
-  private lcomplete(val){
-    if(!val){ this.lazyLoad() }
+  private complete(val){
+    if(!val){ this.lazyLoad(JSON.parse(JSON.stringify(this.info))) }
   }
 
-  private lazyLoad(){
+  private lazyLoad(copyInfo){
     const self = this;
     this.animals = [];
-    const copyInfo = JSON.parse(JSON.stringify(this.info));
     this.tableLoading = true
 
     const load = function*()  {

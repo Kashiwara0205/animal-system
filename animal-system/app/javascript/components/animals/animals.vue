@@ -5,14 +5,15 @@
 
       <search-panel v-bind.sync="query"
         @search="fetchInfo"
-        :animalTypeList = "animalTypeList"
-        :countoryList = "countoryList"
+        :animal-type-list = "animalTypeList"
+        :countory-list = "countoryList"
         v-bind:offset.sync="offset"
       >
       </search-panel>
 
       <list-panel
         @fetchInfo="fetchInfo"
+        :animal-model="animal"
         :info = "info"
         :loading = "loading"
         :animalTypeList = "animalTypeList"
