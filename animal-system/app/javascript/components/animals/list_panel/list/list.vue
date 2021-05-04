@@ -24,11 +24,12 @@
       <el-table-column label="原産国">
         <template slot-scope="scope">
           <countory 
+            :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :countory-to-label="countoryToLabel"
             :editMode="editMode"
             :countory-list="countoryList"
-            :countory-id="scope.row.countory_id">
+            v-bind:countoryId.sync="scope.row.countory_id">
           </countory>
         </template>
       </el-table-column>
