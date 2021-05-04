@@ -38,11 +38,12 @@
       <el-table-column label="体毛">
         <template slot-scope="scope">
           <hair 
+            :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :hair-to-label="hairToLabel"
             :editMode="editMode"
             :hair-list="hairList"
-            :hair="scope.row.hair">
+            v-bind:hair.sync="scope.row.hair">
           </hair>
         </template>
       </el-table-column>
