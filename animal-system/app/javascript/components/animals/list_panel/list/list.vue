@@ -8,7 +8,19 @@
       element-loading-text="Loading..."
       border
       style="width: 100%;">
-      <el-table-column label="動物名" prop="name"></el-table-column>
+
+      <el-table-column label="動物名">
+        <template slot-scope="scope">
+          <animal-name
+            :id="scope.row.id"
+            :url="animalModel.getUpdateUrl()"
+            :editMode="editMode"
+            v-bind:name.sync="scope.row.name">
+          >
+          </animal-name>
+        </template>
+      </el-table-column>
+
       <el-table-column label="種類">
         <template slot-scope="scope">
           <animal-type 
@@ -21,6 +33,7 @@
           </animal-type>
         </template>
       </el-table-column>
+
       <el-table-column label="原産国">
         <template slot-scope="scope">
           <countory 
@@ -33,8 +46,31 @@
           </countory>
         </template>
       </el-table-column>
-      <el-table-column label="体重" prop="weight" :formatter="formatWeight"></el-table-column>
-      <el-table-column label="身長" prop="height" :formatter="formatHeight"> </el-table-column>
+
+      <el-table-column label="体重">
+        <template slot-scope="scope">
+          <weight
+            :id="scope.row.id"
+            :url="animalModel.getUpdateUrl()"
+            :editMode="editMode"
+            v-bind:weight.sync="scope.row.weight">
+          >
+          </weight>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="身長" prop="height" :formatter="formatHeight"> 
+        <template slot-scope="scope">
+          <height
+            :id="scope.row.id"
+            :url="animalModel.getUpdateUrl()"
+            :editMode="editMode"
+            v-bind:height.sync="scope.row.height">
+          >
+          </height>
+        </template>
+      </el-table-column>
+
       <el-table-column label="体毛">
         <template slot-scope="scope">
           <hair 
@@ -47,6 +83,7 @@
           </hair>
         </template>
       </el-table-column>
+      
       <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
       <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetime"> </el-table-column>
     </el-table> 
@@ -56,10 +93,15 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
+
+import AnimalName from "../update_component/animal_name.vue"
 import AnimalType from "../update_component/animal_type.vue"
 import Countory from "../update_component/countory.vue"
 import Hair from "../update_component/hair.vue"
+import Weight from "../update_component/weight.vue"
+import Height from "../update_component/height.vue"
+
 import utils from "../../../../lib/utils"
 import { HAIR_LIST } from "../../../../const"
 import moment from 'moment/moment'
@@ -68,8 +110,11 @@ Vue.use(ElementUI);
 @Component({
   components:{ 
     "animal-type": AnimalType,
+    "animal-name": AnimalName,
     "countory": Countory,
-    "hair": Hair
+    "hair": Hair,
+    "weight": Weight,
+    "height": Height
   }
 })
 export default class List extends Vue {
@@ -89,16 +134,12 @@ export default class List extends Vue {
   private hairToLabel = utils.createValueToLabelHash( HAIR_LIST )
 
   created(){
-   this.animalTypeToLabel = utils.createIdToLabelHash( this.animalTypeList )
-   this.countoryToLabel = utils.createIdToLabelHash( this.countoryList )
+    this.animalTypeToLabel = utils.createIdToLabelHash( this.animalTypeList )
+    this.countoryToLabel = utils.createIdToLabelHash( this.countoryList )
   }
 
   private formatHeight(row, col, value, index){
     return `${value}cm`
-  }
-
-  private formatWeight(row, col, value, index){
-    return `${value}kg`
   }
 
   // 編集モードに切り替わった後にlazyLoadを作動
