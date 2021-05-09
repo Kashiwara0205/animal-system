@@ -15,6 +15,7 @@
           <i class="el-icon-document"></i> 動物情報 一覧
         </el-menu-item>
       </el-submenu>
+      <!--
       <el-submenu index="3">
         <template slot="title">イベント関連</template>
         <el-menu-item index="/events">
@@ -39,6 +40,7 @@
           <i class="el-icon-document"></i> 問い合わせ情報 一覧
           </el-menu-item>
       </el-submenu>
+      -->
     </el-menu>
   </div>
 </template>
