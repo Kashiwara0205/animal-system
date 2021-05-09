@@ -1,10 +1,10 @@
 <template>
   <div id="animal_type" >
     <div v-if="editMode">
-      <el-link type="primary" @click="onClick">{{ formatWeight(height) }}</el-link>
+      <el-link type="primary" @click="onClick">{{ formatHeight(height) }}</el-link>
     </div>
     <div v-else>
-      {{ formatWeight(height) }}
+      {{ formatHeight(height) }}
     </div>
   </div>
 </template>
@@ -21,12 +21,38 @@ export default class Height extends Vue {
   @Prop({ required: true }) editMode
   @Prop({ required: true }) height
 
-  private formatWeight(value){
-    return `${value}kg`
+  private formatHeight(value){
+    return `${value}cm`
   }
 
   private onClick(){
-    console.log("UPD")
+    this.$prompt('身長を入力してください', '身長', {
+      inputValue: this.height,
+      confirmButtonText: '編集',
+      cancelButtonText: 'キャンセル',
+        }).then(({ value }) => {
+          this.onSubmit(value)
+        }).catch(() => {
+          notifier.notifyCancel(this)
+        });
+  }
+
+  private async onSubmit(val){
+    try{
+      const params = {
+        id: this.id,
+        update_info:{ height: val }
+      }
+
+      const res = await http.put(this.url, params)
+      const record = res.data.updated_record
+      this.$emit('update:height', record["height"] )
+      this.$emit('update:updatedAt', record["updated_at"] )
+
+      notifier.notifySuccess(this, {title: "更新成功", message: "身長を更新しました"})
+    }catch(e){
+      notifier.notifyError(this)
+    }
   }
 }
 </script>

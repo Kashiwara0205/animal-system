@@ -27,3 +27,15 @@ body{
 .popper__arrow{
   display: none !important;
 }
+
+.el-message-box__btns {
+  direction: rtl;  
+}
+
+.el-message-box__btns button:nth-child(2) {
+  margin-left: 0;
+}
+
+.el-message-box__btns button:nth-child(1) {
+  margin-left: 10px;
+}

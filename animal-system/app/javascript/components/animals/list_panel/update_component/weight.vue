@@ -26,7 +26,33 @@ export default class Weight extends Vue {
   }
 
   private onClick(){
-    console.log("UPD")
+    this.$prompt('体重を入力してください', '体重', {
+      inputValue: this.weight,
+      confirmButtonText: '編集',
+      cancelButtonText: 'キャンセル',
+        }).then(({ value }) => {
+          this.onSubmit(value)
+        }).catch(() => {
+          notifier.notifyCancel(this)
+        });
+  }
+
+  private async onSubmit(val){
+    try{
+      const params = {
+        id: this.id,
+        update_info:{ weight: val }
+      }
+
+      const res = await http.put(this.url, params)
+      const record = res.data.updated_record
+      this.$emit('update:weight', record["weight"] )
+      this.$emit('update:updatedAt', record["updated_at"] )
+
+      notifier.notifySuccess(this, {title: "更新成功", message: "体重を更新しました"})
+    }catch(e){
+      notifier.notifyError(this)
+    }
   }
 }
 </script>

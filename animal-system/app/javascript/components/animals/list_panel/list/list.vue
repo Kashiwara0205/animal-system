@@ -63,7 +63,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="身長" prop="height" :formatter="formatHeight"> 
+      <el-table-column label="身長"> 
         <template slot-scope="scope">
           <height
             :id="scope.row.id"
@@ -142,10 +142,6 @@ export default class List extends Vue {
   created(){
     this.animalTypeToLabel = utils.createIdToLabelHash( this.animalTypeList )
     this.countoryToLabel = utils.createIdToLabelHash( this.countoryList )
-  }
-
-  private formatHeight(row, col, value, index){
-    return `${value}cm`
   }
 
   // 編集モードに切り替わった後にlazyLoadを作動
