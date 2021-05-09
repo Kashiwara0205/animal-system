@@ -5,6 +5,9 @@
     </h3>
     <el-tabs :tab-position="tabPosition" style="height: 350px;" type="border-card">
       <el-tab-pane label="2021-05" class="panel" >
+        <b> 05月09日 </b>
+        <li>動物一覧検索機能を追加</li>
+        <li>動物一覧に編集モードを追加</li>
         <b> 05月01日 </b>
         <li>ヘッダー追加</li>
         <li>更新履歴表示機能を追加</li>
