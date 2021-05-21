@@ -35,6 +35,6 @@ export default class AuthenticationBtn extends Vue {
     padding-top:15px;
   }
   .authentication-btn{
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
   }
 </style>

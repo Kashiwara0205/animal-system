@@ -92,6 +92,12 @@
       
       <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
       <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetime"> </el-table-column>
+      <el-table-column label="操作" fixed="right" width="150px"> 
+        <template slot-scope="scope">
+          <el-button size="small">編集</el-button>
+          <el-button size="mini" type="danger">削除</el-button>
+        </template>
+      </el-table-column>
     </el-table> 
   </div>
 </template>
