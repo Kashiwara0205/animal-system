@@ -3,6 +3,8 @@
     <div v-if="completeInit">
       <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1>
 
+      <authentication-btn></authentication-btn>
+      
       <search-panel v-bind.sync="query"
         @search="fetchInfo"
         :animal-type-list = "animalTypeList"
@@ -31,6 +33,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import SearchPanel from "../animals/search_panel/search_panel.vue"
 import ListPanel from "../animals/list_panel/list_panel.vue"
+import AuthenticationBtn from "../animals/authentication_btn.vue"
 import Pagination from "../utils/pagination.vue"
 import Animal from "../../model/animal"
 import AnimalType from "../../model/animal_type"
@@ -41,6 +44,7 @@ import utils from "../../lib/utils"
 
 @Component({
   components:{ 
+    "authentication-btn": AuthenticationBtn,
     "list-panel": ListPanel,
     "search-panel": SearchPanel,
   }

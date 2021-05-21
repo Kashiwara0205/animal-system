@@ -32,9 +32,7 @@ export default class Height extends Vue {
       cancelButtonText: 'キャンセル',
         }).then(({ value }) => {
           this.onSubmit(value)
-        }).catch(() => {
-          notifier.notifyCancel(this)
-        });
+        })
   }
 
   private async onSubmit(val){
