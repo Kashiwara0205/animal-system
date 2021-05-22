@@ -39,7 +39,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
     Pokotarou.execute("./test/test_data/animal_types.yml")
 
     mock = MiniTest::Mock.new
-    mock.expect(:get_selectable_elements, []) do raise StandardError.new('DummyError'); end
+    mock.expect(:get_animal_types, []) do raise StandardError.new('DummyError'); end
 
     AnimalTypeService.stub(:new, mock) do 
       get "/api/v1/animals/animal_types"
@@ -96,7 +96,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
 
     params =  { 
       id: 1, 
-      animal: {
+      update_info: {
         name: "update-name",
         weight: 0,
         height: 0,
@@ -133,7 +133,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
 
       params =  { 
         id: 1, 
-        animal: {
+        update_info: {
           name: "update-name",
           weight: 0,
           height: 0,
