@@ -26,6 +26,8 @@ export default class AnimalName extends Vue {
       inputValue: this.name,
       confirmButtonText: '編集',
       cancelButtonText: 'キャンセル',
+      inputPattern: /.+/,
+      inputErrorMessage: '入力内容が不適切です'
         }).then(({ value }) => {
           this.onSubmit(value)
         })

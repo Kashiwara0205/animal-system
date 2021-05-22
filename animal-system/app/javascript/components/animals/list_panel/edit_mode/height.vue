@@ -30,6 +30,8 @@ export default class Height extends Vue {
       inputValue: this.height,
       confirmButtonText: '編集',
       cancelButtonText: 'キャンセル',
+      inputPattern: /.[0-9]/,
+      inputErrorMessage: '入力内容が不適切です'
         }).then(({ value }) => {
           this.onSubmit(value)
         })
