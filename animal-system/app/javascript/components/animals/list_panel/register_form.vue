@@ -144,10 +144,10 @@ export default class RegisterBtn extends Vue {
 
       notifier.notifySuccess(this, {title: "登録成功", message: "登録を完了しました"})
 
+      this.resetForm()
       this.$emit('update:registerFormVisible', false)
       this.$emit("complete")
     }catch(e){
-      console.log(e)
       notifier.notifyError(this)
     }
   }
