@@ -41,7 +41,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
       get "/api/v1/animals/animal_types"
       assert_response 500
       res = JSON.parse(response.body)
-      assert_equal "DummyError", res["error"]
+      assert_equal "DummyError", res["errors"]
     end
   end
 
@@ -85,7 +85,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
       get "/api/v1/animals"
       assert_response 500
       res = JSON.parse(response.body)
-      assert_equal "DummyError", res["error"]
+      assert_equal "DummyError", res["errors"]
     end
   end
 
@@ -144,7 +144,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
       put "/api/v1/animals", params: params
       assert_response 500
       res = JSON.parse(response.body)
-      assert_equal "DummyError", res["error"]
+      assert_equal "DummyError", res["errors"]
     end
   end
 
@@ -199,7 +199,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
       post "/api/v1/animals", params: params
       assert_response 500
       res = JSON.parse(response.body)
-      assert_equal "DummyError", res["error"]
+      assert_equal "DummyError", res["errors"]
     end
   end
 end

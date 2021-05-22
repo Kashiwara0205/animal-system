@@ -140,7 +140,7 @@ export default class RegisterBtn extends Vue {
   private async submit(){
     try{
       const params = this.createParamter()
-      const res = await http.post(this.url, params)
+      await http.post(this.url, params)
 
       notifier.notifySuccess(this, {title: "登録成功", message: "登録を完了しました"})
 
@@ -148,7 +148,11 @@ export default class RegisterBtn extends Vue {
       this.$emit('update:registerFormVisible', false)
       this.$emit("complete")
     }catch(e){
-      notifier.notifyError(this)
+      if (422 === e.response.status){
+        this.errors = e.response.data.errors
+      }else{
+        notifier.notifyError(this)
+      }
     }
   }
 

@@ -50,7 +50,7 @@ class CountoriesControllerTest  < ActionDispatch::IntegrationTest
       get "/api/v1/countories"
       assert_response 500
       res = JSON.parse(response.body)
-      assert_equal "DummyError", res["error"]
+      assert_equal "DummyError", res["errors"]
     end
   end
 end

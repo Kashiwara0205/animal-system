@@ -7,7 +7,7 @@ class Api::V1::AnimalsController < ApiController
 
       render json: { info: info, count: count }, status: 200
     rescue => e
-      res = { error: e }
+      res = { errors: e }
       render json: res, status: 500
     end
   end
@@ -22,9 +22,9 @@ class Api::V1::AnimalsController < ApiController
 
       render json: { updated_record: updated_record }, status: 200
      rescue ActiveRecord::RecordInvalid => invalid
-      render json: { error: invalid }, status: 422
+      render json: { errors: invalid.record.errors.full_messages }, status: 422
     rescue => e
-      render json: { error: e }, status: 500
+      render json: { errors: e }, status: 500
     end
   end
 
@@ -36,9 +36,9 @@ class Api::V1::AnimalsController < ApiController
       end
       render json: { }, status: 200
      rescue ActiveRecord::RecordInvalid => invalid
-      render json: { error: invalid }, status: 422
+      render json: { errors: invalid.record.errors.full_messages }, status: 422
     rescue => e
-      render json: { error: e }, status: 500
+      render json: { errors: e }, status: 500
     end
   end
 
@@ -47,7 +47,7 @@ class Api::V1::AnimalsController < ApiController
       service = AnimalTypeService.new(animal_type_repo: AnimalTypeRepository)
       render json: service.get_animal_types, status: 200
     rescue => e
-      res = { error: e }
+      res = { errors: e }
       render json: res, status: 500
     end
   end

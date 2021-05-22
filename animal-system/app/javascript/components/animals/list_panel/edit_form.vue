@@ -162,7 +162,11 @@ export default class EditForm extends Vue {
       this.$emit('updateRow', record)
       this.$emit('update:editFormVisible', false)
     }catch(e){
-      notifier.notifyError(this)
+      if (422 === e.response.status){
+        this.errors = e.response.data.errors
+      }else{
+        notifier.notifyError(this)
+      }
     }
   }
 
