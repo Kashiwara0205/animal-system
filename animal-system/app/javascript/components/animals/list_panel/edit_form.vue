@@ -10,7 +10,7 @@
 
         <el-form-item label="種類" prop="animalTypeId">
           <br>
-          <el-select v-model="form.animalTypeId" placeholder="種類を入力してください" filterable>
+          <el-select v-model="form.animalTypeId" placeholder="種類を入力してください" filterable style="width: 100%">
             <el-option
               v-for="item in animalTypeList"
                 :key="item.label"
@@ -22,7 +22,7 @@
 
         <el-form-item label="原産国" prop="countoryId">
           <br>
-          <el-select v-model="form.countoryId" placeholder="原産国を入力してください" filterable>
+          <el-select v-model="form.countoryId" placeholder="原産国を入力してください" filterable style="width: 100%">
             <el-option
               v-for="item in countoryList"
                 :key="item.label"
@@ -42,7 +42,7 @@
 
         <el-form-item label="体毛" prop="hair">
           <br>
-          <el-select v-model="form.hair" placeholder="体毛を入力してください" filterable>
+          <el-select v-model="form.hair" placeholder="体毛を入力してください" filterable style="width: 100%">
             <el-option
               v-for="item in hairList"
                 :key="item.label"
@@ -62,7 +62,7 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="onClickConfirm()">編集</el-button>
-        <el-button @click="onClickCancel()">キャンセル</el-button>
+        <el-button @click="onClose()">キャンセル</el-button>
       </span>
     </el-dialog>
 
@@ -131,10 +131,6 @@ export default class EditForm extends Vue {
     form.hair = this.editInfo.hair
 
     return form
-  }
-
-  private onClickCancel(){
-    this.$emit('update:editFormVisible', false)
   }
 
   private resetForm(){
