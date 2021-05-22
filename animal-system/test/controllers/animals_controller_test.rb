@@ -6,8 +6,6 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
   # 期待値: - コントローラから期待するデータが帰ってくること
   #        - status-code 200
   test "get /api/v1/animals/animal_types アクションからデータを取得する" do
-    Pokotarou.execute("./test/test_data/animal_types.yml")
-
     get "/api/v1/animals/animal_types"
     assert_response 200
     res = JSON.parse(response.body)
@@ -36,8 +34,6 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
   # 期待値: - エラー内容のー返却 
   #        - status-code 500
   test "get /api/v1/animals/animal_types でエラーが発生したら500が発生することを担保" do
-    Pokotarou.execute("./test/test_data/animal_types.yml")
-
     mock = MiniTest::Mock.new
     mock.expect(:get_animal_types, []) do raise StandardError.new('DummyError'); end
 
@@ -52,7 +48,11 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
   # 期待値: - コントローラから期待するデータが帰ってくること
   #        - status-code 200
   test "get /api/v1/animals アクションからデータを取得する" do
-    Pokotarou.execute("./test/test_data/animals.yml")
+    Pokotarou.execute("./test/test_data/animals/animals.yml")
+
+    Animal.create!({
+      name: "test-animal", weight: 10, height: 111,
+      body: "small", hair:"none", animal_type_id: 1, countory_id: 1})
 
     get "/api/v1/animals", params: {offset: 0, limit: 50, query: {} }
 
@@ -62,21 +62,21 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
     info = res["info"]
     count = res["count"]
 
-    assert_equal 10, count
+    assert_equal 11, count
 
-    assert_equal "犬_0",  info[0]["name"]
+    assert_equal "test-animal",  info[0]["name"]
     assert_equal 10,      info[0]["weight"]
     assert_equal 111,     info[0]["height"]
     assert_equal "small", info[0]["body"]
     assert_equal "none",  info[0]["hair"]
     assert_equal 1,       info[0]["animal_type_id"]
-    assert_equal 2,       info[0]["countory_id"]
+    assert_equal 1,       info[0]["countory_id"]
   end
 
   # 期待値: - エラー内容のー返却 
   #        - status-code 500
   test "get /api/v1/animals でエラーが発生したら500が発生することを担保" do
-    Pokotarou.execute("./test/test_data/animals.yml")
+    Pokotarou.execute("./test/test_data/animals/animals.yml")
 
     mock = MiniTest::Mock.new
     mock.expect(:get, []) do raise StandardError.new('DummyError'); end
@@ -92,7 +92,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
   # 期待値: - 期待する内容でデータが更新されること
   #        - status-code 200
   test "put /api/v1/animals アクションでデータを更新する" do 
-    Pokotarou.execute("./test/test_data/animals.yml")
+    Pokotarou.execute("./test/test_data/animals/animals.yml")
 
     params =  { 
       id: 1, 
@@ -124,7 +124,7 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
   # 期待値: - エラー内容のー返却 
   #        - status-code 500
   test "put /api/v1/animals アクションでエラーが発生したら500が発生することを担保" do
-    Pokotarou.execute("./test/test_data/animals.yml")
+    Pokotarou.execute("./test/test_data/animals/animals.yml")
 
     mock = MiniTest::Mock.new
     mock.expect(:update, []) do raise StandardError.new('DummyError'); end
@@ -142,6 +142,61 @@ class AnimalsControllerTest  < ActionDispatch::IntegrationTest
       }
 
       put "/api/v1/animals", params: params
+      assert_response 500
+      res = JSON.parse(response.body)
+      assert_equal "DummyError", res["error"]
+    end
+  end
+
+  # 期待値: - 期待する内容でデータが作成されること
+  #        - status-code 200
+  test "post /api/v1/animals アクションでデータを更新する" do 
+    params =  { 
+      id: 1, 
+      create_info: {
+        name: "create-name",
+        animal_type_id: 1,
+        countory_id: 1,
+        weight: 0,
+        height: 0,
+        hair: "short"
+      } 
+    }
+
+    post "/api/v1/animals", params: params
+
+    assert_response 200
+
+    record = Animal.first
+    assert_equal "create-name", record.name
+    assert_equal 1, record.animal_type_id
+    assert_equal 1, record.countory_id
+    assert_equal 0, record.weight
+    assert_equal 0, record.height
+    assert_equal "short", record.hair
+  end
+
+  # 期待値: - エラー内容のー返却 
+  #        - status-code 500
+  test "post /api/v1/animals アクションでエラーが発生したら500が発生することを担保" do
+    Pokotarou.execute("./test/test_data/animals/animals.yml")
+
+    mock = MiniTest::Mock.new
+    mock.expect(:create, []) do raise StandardError.new('DummyError'); end
+
+    AnimalService.stub(:new, mock) do 
+
+      params =  { 
+        id: 1, 
+        create_info: {
+          name: "create-name",
+          weight: 0,
+          height: 0,
+          hair: "short"
+        } 
+      }
+
+      post "/api/v1/animals", params: params
       assert_response 500
       res = JSON.parse(response.body)
       assert_equal "DummyError", res["error"]

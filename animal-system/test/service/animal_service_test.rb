@@ -44,4 +44,19 @@ class AnimalServiceTest < ActiveSupport::TestCase
     animal_repo.verify
     animal_record.verify
   end
+
+  # 期待値: infoがcreateメソッドに渡っていること
+  test "createメソッドの動作を担保する" do 
+    animal_repo = MiniTest::Mock.new
+    animal_repo.expect :create, { id: 1, name: "xxx" }, [{info: { id: 1, name: "xxx" } }]
+
+    service = AnimalService.new(animal_repo: animal_repo)
+
+    record = service.create(info: { id: 1, name: "xxx" })
+
+    assert_equal "xxx", record[:name]
+    assert_equal "xxx", record[:name]
+
+    animal_repo.verify
+  end
 end

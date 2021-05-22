@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # API
   namespace :api, format: 'json' do
     namespace :v1 do
-      resource :animals,  only: [:update]
+      resource :animals,  only: [:update, :create]
       resources :animals, only: [:index]
       namespace :animals do 
         get 'animal_types'

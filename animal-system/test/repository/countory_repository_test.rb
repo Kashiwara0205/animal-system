@@ -5,7 +5,6 @@ class CountoryRepositoryTest < ActiveSupport::TestCase
   # 期待値: - DBからデータが取得出来ること
   #        - 返却されるレコードデータの検証
   test "getメソッドで帰ってくる要素を担保する" do
-    Pokotarou.execute("./test/test_data/countories.yml")
     records = CountoryRepository.get()
 
     assert_equal 8, records.size

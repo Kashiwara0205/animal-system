@@ -5,7 +5,6 @@ class AnimalTypeRepositoryTest < ActiveSupport::TestCase
   # 期待値: - DBからデータが取得出来ること
   #        - 返却されるレコードデータの検証
   test "getメソッドで帰ってくる要素を担保する" do
-    Pokotarou.execute("./test/test_data/animal_types.yml")
     records = AnimalTypeRepository.get()
 
     assert_equal 6, records.size

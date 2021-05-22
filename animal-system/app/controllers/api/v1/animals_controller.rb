@@ -28,6 +28,20 @@ class Api::V1::AnimalsController < ApiController
     end
   end
 
+  def create
+    begin
+      ActiveRecord::Base.transaction do
+        service = AnimalService.new(animal_repo: AnimalRepository)
+        service.create(info: animal_params(params[:create_info]))
+      end
+      render json: { }, status: 200
+     rescue ActiveRecord::RecordInvalid => invalid
+      render json: { error: invalid }, status: 422
+    rescue => e
+      render json: { error: e }, status: 500
+    end
+  end
+
   def animal_types
     begin
       service = AnimalTypeService.new(animal_type_repo: AnimalTypeRepository)

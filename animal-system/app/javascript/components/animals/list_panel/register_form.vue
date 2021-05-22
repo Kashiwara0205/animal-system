@@ -1,7 +1,7 @@
 
 <template>
   <span>
-    <el-dialog title="動物編集フォーム" :before-close="onClose" :visible.sync="editFormVisible">
+    <el-dialog title="動物追加フォーム" :before-close="onClose" :visible.sync="registerFormVisible">
       <el-form :model="form" :rules="rules" ref="form" >
       
         <el-form-item label="動物名" prop="name">
@@ -61,7 +61,7 @@
       </div>
 
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="onClickConfirm()">編集</el-button>
+        <el-button type="primary" @click="onClickConfirm()">登録</el-button>
         <el-button @click="onClickCancel()">キャンセル</el-button>
       </span>
     </el-dialog>
@@ -84,15 +84,14 @@ const EMPTY_FORM = {
 }
 
 @Component
-export default class EditForm extends Vue {
-  @Prop({ required: true }) editInfo
+export default class RegisterBtn extends Vue {
+  @Prop({ required: true }) registerFormVisible
   @Prop({ required: true }) url
-  @Prop({ required: true }) editFormVisible
   @Prop({ required: true }) animalTypeList
   @Prop({ required: true }) countoryList
   @Prop({ required: true }) hairList
 
-  private form = this.createEditForm()
+  private form = EMPTY_FORM
   private errors = []
 
   private rules = {
@@ -121,20 +120,8 @@ export default class EditForm extends Vue {
     ],
   }
 
-  private createEditForm(){
-    let form = EMPTY_FORM
-    form.name = this.editInfo.name
-    form.animalTypeId = this.editInfo.animal_type_id
-    form.countoryId = this.editInfo.countory_id
-    form.weight = this.editInfo.weight
-    form.height = this.editInfo.height
-    form.hair = this.editInfo.hair
-
-    return form
-  }
-
   private onClickCancel(){
-    this.$emit('update:editFormVisible', false)
+    this.$emit('update:registerFormVisible', false)
   }
 
   private resetForm(){
@@ -143,8 +130,7 @@ export default class EditForm extends Vue {
 
   private createParamter(){
     return {
-      id: this.editInfo.id,
-      update_info:{ 
+      create_info:{ 
         name: this.form.name,
         animal_type_id: this.form.animalTypeId,
         countory_id: this.form.countoryId,
@@ -158,14 +144,14 @@ export default class EditForm extends Vue {
   private async submit(){
     try{
       const params = this.createParamter()
-      const res = await http.put(this.url, params)
-      const record = res.data.updated_record
+      const res = await http.post(this.url, params)
 
-      notifier.notifySuccess(this, {title: "更新成功", message: "更新を完了しました"})
+      notifier.notifySuccess(this, {title: "登録成功", message: "登録を完了しました"})
 
-      this.$emit('updateRow', record)
-      this.$emit('update:editFormVisible', false)
+      this.$emit('update:registerFormVisible', false)
+      this.$emit("complete")
     }catch(e){
+      console.log(e)
       notifier.notifyError(this)
     }
   }
@@ -182,7 +168,7 @@ export default class EditForm extends Vue {
   }
 
   private onClose(){
-    this.$emit('update:editFormVisible', false)
+    this.$emit('update:registerFormVisible', false)
     this.resetForm()
   }
 }
@@ -192,6 +178,7 @@ export default class EditForm extends Vue {
 
 .error-message{
   border-radius: 10px;
+  margin-top: 40px;
   padding: 10px;
   color: #FF3C3C;
   background-color: #FFB4C0;

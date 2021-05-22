@@ -6,8 +6,6 @@ class CountoriesControllerTest  < ActionDispatch::IntegrationTest
   # 期待値: - コントローラから期待するデータが帰ってくること
   #        - status-code 200
   test "countoriesアクションからデータを取得する" do
-    Pokotarou.execute("./test/test_data/countories.yml")
-
     get "/api/v1/countories"
     assert_response 200
     res = JSON.parse(response.body)

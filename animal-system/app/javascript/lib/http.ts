@@ -25,6 +25,10 @@ export default{
     return axios.put(url, params);
   },
 
+  post(url, params){
+    return axios.post(url, params);
+  },
+
   getAll(requestList){
     return Promise.all( requestList.map(x => axios.get(x["url"],  createConfig(x["params"]) as any)) )
   }

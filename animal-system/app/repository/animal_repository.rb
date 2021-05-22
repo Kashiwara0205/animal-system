@@ -15,7 +15,7 @@ class AnimalRepository
                     "countories.id as countory_id")
             .limit(limit)
             .offset(offset)
-            .order(:id)
+            .order(created_at: "DESC")
             .ransack(query)
             .result
     end
@@ -27,6 +27,10 @@ class AnimalRepository
     def update id:, info:
       record = Animal.find(id)
       record.update!(info)
+    end
+
+    def create info:
+      Animal.create!(info)
     end
 
     def get_count query:

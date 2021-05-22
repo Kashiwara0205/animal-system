@@ -30,7 +30,6 @@
             :editMode="editMode"
             v-bind:name.sync="scope.row.name"
             v-bind:updatedAt.sync="scope.row.updated_at">
-          >
           </animal-name>
         </template>
       </el-table-column>
@@ -129,8 +128,8 @@ import Height from "../edit_mode/height.vue"
 import EditForm from "../edit_form.vue"
 
 import utils from "../../../../lib/utils"
-import { HAIR_LIST } from "../../../../const"
 import moment from 'moment/moment'
+
 Vue.use(ElementUI);
 
 @Component({
@@ -151,19 +150,20 @@ export default class List extends Vue {
   @Prop({ required: true }) fetchLoading
   @Prop({ required: true }) animalTypeList
   @Prop({ required: true }) countoryList
+  @Prop({ required: true }) hairList
 
   private tableLoading = false
   private animals = []
-  private hairList = HAIR_LIST
 
   private animalTypeToLabel = {}
   private countoryToLabel = {}
-  private hairToLabel = utils.createValueToLabelHash( HAIR_LIST )
+  private hairToLabel = {}
 
   private editFormVisible = false
   private editRow = { idx:0, info: {} }
 
   created(){
+    this.hairToLabel =  utils.createValueToLabelHash( this.hairList )
     this.animalTypeToLabel = utils.createIdToLabelHash( this.animalTypeList )
     this.countoryToLabel = utils.createIdToLabelHash( this.countoryList )
   }

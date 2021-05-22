@@ -16,4 +16,8 @@ class AnimalService
     @animal_repo.update(id: id, info: info)
     @animal_repo.find(id: id).attributes
   end
+
+  def create info:
+    @animal_repo.create(info: info)
+  end
 end
