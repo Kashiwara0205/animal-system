@@ -31,7 +31,7 @@ class Api::V1::AnimalsController < ApiController
   def animal_types
     begin
       service = AnimalTypeService.new(animal_type_repo: AnimalTypeRepository)
-      render json: service.get_selectable_elements, status: 200
+      render json: service.get_animal_types, status: 200
     rescue => e
       res = { error: e }
       render json: res, status: 500

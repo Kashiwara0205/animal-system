@@ -1,5 +1,18 @@
 <template>
   <div id="list" >
+
+    <edit-form 
+      v-if="editFormVisible"
+      v-bind:edit-form-visible.sync="editFormVisible"
+      :edit-info="editRow.info"
+      :url="animalModel.getUpdateUrl()"
+      :animal-type-list="animalTypeList"
+      :countory-list="countoryList"
+      :hair-list="hairList"
+      @updateRow="updateRow"
+      >
+    </edit-form>
+
     <el-table
       :data="animals"
       @hook:mounted="complete"
@@ -92,9 +105,9 @@
       
       <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
       <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetime"> </el-table-column>
-      <el-table-column label="操作" fixed="right" width="150px"> 
+      <el-table-column label="操作" width="150px"> 
         <template slot-scope="scope">
-          <el-button size="small">編集</el-button>
+           <el-button size="small" @click="onClickEditBtn(scope.$index, scope.row)">編集</el-button>
           <el-button size="mini" type="danger">削除</el-button>
         </template>
       </el-table-column>
@@ -107,12 +120,13 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
-import AnimalName from "../update_component/animal_name.vue"
-import AnimalType from "../update_component/animal_type.vue"
-import Countory from "../update_component/countory.vue"
-import Hair from "../update_component/hair.vue"
-import Weight from "../update_component/weight.vue"
-import Height from "../update_component/height.vue"
+import AnimalName from "../edit_mode/animal_name.vue"
+import AnimalType from "../edit_mode/animal_type.vue"
+import Countory from "../edit_mode/countory.vue"
+import Hair from "../edit_mode/hair.vue"
+import Weight from "../edit_mode/weight.vue"
+import Height from "../edit_mode/height.vue"
+import EditForm from "../edit_form.vue"
 
 import utils from "../../../../lib/utils"
 import { HAIR_LIST } from "../../../../const"
@@ -126,7 +140,8 @@ Vue.use(ElementUI);
     "countory": Countory,
     "hair": Hair,
     "weight": Weight,
-    "height": Height
+    "height": Height,
+    "edit-form": EditForm
   }
 })
 export default class List extends Vue {
@@ -145,6 +160,9 @@ export default class List extends Vue {
   private countoryToLabel = {}
   private hairToLabel = utils.createValueToLabelHash( HAIR_LIST )
 
+  private editFormVisible = false
+  private editRow = { idx:0, info: {} }
+
   created(){
     this.animalTypeToLabel = utils.createIdToLabelHash( this.animalTypeList )
     this.countoryToLabel = utils.createIdToLabelHash( this.countoryList )
@@ -160,6 +178,23 @@ export default class List extends Vue {
   @Watch("fetchLoading")
   private complete(val){
     if(!val){ this.lazyLoad(JSON.parse(JSON.stringify(this.info))) }
+  }
+
+  private updateRow(updatedRecord){
+    const idx = this.editRow.idx
+    this.$set(this.animals[idx], "name", updatedRecord.name)
+    this.$set(this.animals[idx], "animal_type_id", updatedRecord.animal_type_id)
+    this.$set(this.animals[idx], "countory_id", updatedRecord.countory_id)
+    this.$set(this.animals[idx], "weight", updatedRecord.weight)
+    this.$set(this.animals[idx], "height", updatedRecord.height)
+    this.$set(this.animals[idx], "hair", updatedRecord.hair)
+    this.$set(this.animals[idx], "updated_at", updatedRecord.updated_at)
+  }
+
+  private onClickEditBtn(idx, row){
+    this.$set(this.editRow, "idx", idx)
+    this.$set(this.editRow, "info", row)
+    this.editFormVisible = true
   }
 
   private lazyLoad(copyInfo){

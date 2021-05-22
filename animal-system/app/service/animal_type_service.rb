@@ -3,7 +3,7 @@ class AnimalTypeService
     @animal_type_repo = animal_type_repo
   end
 
-  def get_selectable_elements
+  def get_animal_types
     records = @animal_type_repo.get
 
     records.map { |m|
