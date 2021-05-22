@@ -1,9 +1,13 @@
 <template>
   <div id="base" v-loading.fullscreen.lock="!completeInit" element-loading-text="Loading...">
     <div v-if="completeInit">
-      <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1>
-
-      <authentication-btn></authentication-btn>
+  
+      <table>
+        <tr>
+          <td> <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> </td>
+          <td> <authentication-btn></authentication-btn> </td>
+        </tr>
+      </table>
 
       <search-panel v-bind.sync="query"
         @search="fetchInfo"
