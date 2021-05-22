@@ -26,7 +26,8 @@ export default {
     self.$notify.error({
       title: title,
       message: message,
-      position: 'top-left'
+      position: 'top-left',
+      duration: 0
     });
   }
 }

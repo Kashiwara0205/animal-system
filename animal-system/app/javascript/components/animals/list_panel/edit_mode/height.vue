@@ -30,8 +30,8 @@ export default class Height extends Vue {
       inputValue: String(this.height),
       confirmButtonText: '編集',
       cancelButtonText: 'キャンセル',
-      inputPattern: /[0-9]+/,
-      inputErrorMessage: '入力内容が不適切です'
+      inputPattern: /.+/,
+      inputErrorMessage: 'データを入力してください'
         }).then(({ value }) => {
           this.onSubmit(value)
         })
@@ -51,7 +51,11 @@ export default class Height extends Vue {
 
       notifier.notifySuccess(this, {title: "更新成功", message: "身長を更新しました"})
     }catch(e){
-      notifier.notifyError(this)
+      if (422 === e.response.status){
+        notifier.notifyError(this, "更新に失敗しました", e.response.data.errors[0])
+      }else{
+        notifier.notifyError(this)
+      }
     }
   }
 }

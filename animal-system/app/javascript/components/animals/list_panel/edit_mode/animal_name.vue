@@ -27,7 +27,7 @@ export default class AnimalName extends Vue {
       confirmButtonText: '編集',
       cancelButtonText: 'キャンセル',
       inputPattern: /.+/,
-      inputErrorMessage: '入力内容が不適切です'
+      inputErrorMessage: 'データを入力してください'
         }).then(({ value }) => {
           this.onSubmit(value)
         })
@@ -47,7 +47,11 @@ export default class AnimalName extends Vue {
 
       notifier.notifySuccess(this, {title: "更新成功", message: "動物名を更新しました"})
     }catch(e){
-      notifier.notifyError(this)
+      if (422 === e.response.status){
+        notifier.notifyError(this, "更新に失敗しました", e.response.data.errors[0])
+      }else{
+        notifier.notifyError(this)
+      }
     }
   }
 }
