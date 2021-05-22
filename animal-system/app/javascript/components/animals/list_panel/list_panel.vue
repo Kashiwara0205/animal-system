@@ -41,7 +41,7 @@ export default class ListPanel extends Vue {
   @Prop({ required: true }) offset
 
   private editMode = false
-  private paginationOffset = 50
+  private paginationOffset = 0
 
   private fetchInfo(){ 
     this.$emit('update:offset', this.paginationOffset)

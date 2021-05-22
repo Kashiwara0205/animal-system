@@ -27,10 +27,10 @@ export default class Height extends Vue {
 
   private onClick(){
     this.$prompt('身長を入力してください', '身長', {
-      inputValue: this.height,
+      inputValue: String(this.height),
       confirmButtonText: '編集',
       cancelButtonText: 'キャンセル',
-      inputPattern: /.[0-9]/,
+      inputPattern: /[0-9]+/,
       inputErrorMessage: '入力内容が不適切です'
         }).then(({ value }) => {
           this.onSubmit(value)

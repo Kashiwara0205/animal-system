@@ -4,7 +4,7 @@
       <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1>
 
       <authentication-btn></authentication-btn>
-      
+
       <search-panel v-bind.sync="query"
         @search="fetchInfo"
         :animal-type-list = "animalTypeList"

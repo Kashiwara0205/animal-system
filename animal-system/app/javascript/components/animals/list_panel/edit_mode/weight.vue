@@ -27,10 +27,10 @@ export default class Weight extends Vue {
 
   private onClick(){
     this.$prompt('体重を入力してください', '体重', {
-      inputValue: this.weight,
+      inputValue: String(this.weight),
       confirmButtonText: '編集',
       cancelButtonText: 'キャンセル',
-      inputPattern: /.[0-9]/,
+      inputPattern: /[0-9]+/,
       inputErrorMessage: '入力内容が不適切です'
         }).then(({ value }) => {
           this.onSubmit(value)
