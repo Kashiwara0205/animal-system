@@ -107,7 +107,9 @@
       <el-table-column label="操作" width="150px"> 
         <template slot-scope="scope">
            <el-button size="small" @click="onClickEditBtn(scope.$index, scope.row)">編集</el-button>
-          <el-button size="mini" type="danger">削除</el-button>
+           <delete-btn :id="scope.row.id" :name="scope.row.name" :url="animalModel.getUpdateUrl()"
+                       @complete="fetchInfo">
+           </delete-btn>
         </template>
       </el-table-column>
     </el-table> 
@@ -126,6 +128,7 @@ import Hair from "./edit_mode/hair.vue"
 import Weight from "./edit_mode/weight.vue"
 import Height from "./edit_mode/height.vue"
 import EditForm from "./form/edit_form.vue"
+import DeleteBtn from "./delete_btn.vue"
 
 import utils from "../../../lib/utils"
 import moment from 'moment/moment'
@@ -140,7 +143,8 @@ Vue.use(ElementUI);
     "hair": Hair,
     "weight": Weight,
     "height": Height,
-    "edit-form": EditForm
+    "edit-form": EditForm,
+    "delete-btn": DeleteBtn
   }
 })
 export default class List extends Vue {
@@ -178,6 +182,10 @@ export default class List extends Vue {
   @Watch("fetchLoading")
   private complete(val){
     if(!val){ this.lazyLoad(JSON.parse(JSON.stringify(this.info))) }
+  }
+
+  private fetchInfo(){ 
+    this.$emit("fetchInfo") 
   }
 
   private updateRow(updatedRecord){

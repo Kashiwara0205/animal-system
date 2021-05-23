@@ -39,3 +39,15 @@ body{
 .el-message-box__btns button:nth-child(1) {
   margin-left: 10px;
 }
+
+.el-popconfirm__action {
+  direction: rtl;  
+}
+
+.el-popconfirm__action button:nth-child(2) {
+  margin-left: 0;
+}
+
+.el-popconfirm__action button:nth-child(1) {
+  margin-left: 10px;
+}

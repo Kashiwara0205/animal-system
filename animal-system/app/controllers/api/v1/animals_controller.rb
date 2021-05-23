@@ -54,6 +54,6 @@ class Api::V1::AnimalsController < ApiController
 
   private
   def animal_params info
-    info.permit(:countory_id, :animal_type_id, :name, :weight, :height, :hair)
+    info.permit(:countory_id, :animal_type_id, :name, :weight, :height, :hair, :visible)
   end
 end

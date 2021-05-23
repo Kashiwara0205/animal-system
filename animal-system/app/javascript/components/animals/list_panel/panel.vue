@@ -26,7 +26,8 @@
               :fetchLoading="loading" 
               :animal-type-list="animalTypeList" 
               :countory-list="countoryList"
-              :hair-list="hairList" >
+              :hair-list="hairList"
+              @fetchInfo="fetchInfo" >
         </list>
       </el-tab-pane>
     </el-tabs>
