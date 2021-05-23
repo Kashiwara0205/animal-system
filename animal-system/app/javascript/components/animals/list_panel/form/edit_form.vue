@@ -71,8 +71,8 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import http from '../../../lib/http'
-import notifier from '../../../lib/notifier' 
+import http from '../../../../lib/http'
+import notifier from '../../../../lib/notifier' 
 
 const EMPTY_FORM = {
   name: "",

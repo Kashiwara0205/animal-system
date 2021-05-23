@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_012648) do
+ActiveRecord::Schema.define(version: 2021_05_23_075147) do
 
   create_table "animal_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_012648) do
     t.datetime "updated_at", precision: 6, null: false
     t.column "body", "enum('small','middle','large')", null: false
     t.column "hair", "enum('none','short','long')", null: false
+    t.boolean "visible", default: true
     t.index ["animal_type_id"], name: "index_animals_on_animal_type_id"
     t.index ["countory_id"], name: "index_animals_on_countory_id"
   end

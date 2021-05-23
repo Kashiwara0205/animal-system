@@ -36,7 +36,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import SearchPanel from "../animals/search_panel/search_panel.vue"
-import ListPanel from "../animals/list_panel/list_panel.vue"
+import ListPanel from "../animals/list_panel/panel.vue"
 import AuthenticationBtn from "../animals/authentication_btn.vue"
 import Pagination from "../utils/pagination.vue"
 import Animal from "../../model/animal"

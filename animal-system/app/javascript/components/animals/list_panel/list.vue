@@ -119,15 +119,15 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
-import AnimalName from "../edit_mode/animal_name.vue"
-import AnimalType from "../edit_mode/animal_type.vue"
-import Countory from "../edit_mode/countory.vue"
-import Hair from "../edit_mode/hair.vue"
-import Weight from "../edit_mode/weight.vue"
-import Height from "../edit_mode/height.vue"
-import EditForm from "../edit_form.vue"
+import AnimalName from "./edit_mode/animal_name.vue"
+import AnimalType from "./edit_mode/animal_type.vue"
+import Countory from "./edit_mode/countory.vue"
+import Hair from "./edit_mode/hair.vue"
+import Weight from "./edit_mode/weight.vue"
+import Height from "./edit_mode/height.vue"
+import EditForm from "./form/edit_form.vue"
 
-import utils from "../../../../lib/utils"
+import utils from "../../../lib/utils"
 import moment from 'moment/moment'
 
 Vue.use(ElementUI);

@@ -35,8 +35,8 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import List from "../list_panel/list/list.vue"
-import RegisterForm from "../list_panel/register_form.vue"
+import List from "../list_panel/list.vue"
+import RegisterForm from "../list_panel/form/register_form.vue"
 import Pagination from "../../utils/pagination.vue"
 import { HAIR_LIST } from "../../../const"
 

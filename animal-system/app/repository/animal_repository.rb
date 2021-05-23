@@ -15,6 +15,7 @@ class AnimalRepository
                     "countories.id as countory_id")
             .limit(limit)
             .offset(offset)
+            .where(visible: true)
             .order(created_at: "DESC")
             .ransack(query)
             .result
