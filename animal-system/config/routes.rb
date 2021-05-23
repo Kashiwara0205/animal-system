@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :animals, only: [:index]
       namespace :animals do 
         get 'animal_types'
+        get 'csv'
       end
 
       resources :countories, only: [:index] 

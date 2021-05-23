@@ -15,6 +15,12 @@
       <el-tab-pane>
         <span slot="label"><i class="el-icon-document"></i> 一覧表示</span>
 
+        <download-btn :query="query" 
+                      :url="animalModel.getCsvUrl()"
+                      :animal-type-list="animalTypeList" 
+                      :countory-list="countoryList"
+                      :hair-list="hairList">
+        </download-btn>
         <el-button @click="registerFormVisible = true" size="small"> 新規追加 </el-button>
         <el-checkbox v-model="editMode" style="padding-left: 15px; padding-bottom: 15px;"> 編集モード</el-checkbox>
 
@@ -38,6 +44,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import List from "../list_panel/list.vue"
 import RegisterForm from "../list_panel/form/register_form.vue"
+import DownloadBtn from "./download_btn.vue"
 import Pagination from "../../utils/pagination.vue"
 import { HAIR_LIST } from "../../../const"
 
@@ -45,7 +52,8 @@ import { HAIR_LIST } from "../../../const"
   components:{ 
     list: List,
     pagination: Pagination,
-    "register-form": RegisterForm
+    "register-form": RegisterForm,
+    "download-btn": DownloadBtn
   }
 })
 export default class ListPanel extends Vue {
@@ -56,6 +64,7 @@ export default class ListPanel extends Vue {
   @Prop({ required: true }) countoryList
   @Prop({ required: true }) total
   @Prop({ required: true }) offset
+  @Prop({ required: true }) query
 
   private hairList = HAIR_LIST
   private editMode = false

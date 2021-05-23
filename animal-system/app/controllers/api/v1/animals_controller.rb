@@ -12,6 +12,18 @@ class Api::V1::AnimalsController < ApiController
     end
   end
 
+  def csv
+    begin
+      service = AnimalService.new(animal_repo: AnimalRepository)
+      info = service.get_csv(query: params[:query])
+
+      render json: { info: info }, status: 200
+    rescue => e
+      res = { errors: e }
+      render json: res, status: 500
+    end
+  end
+
   def update
     begin
       updated_record = {}

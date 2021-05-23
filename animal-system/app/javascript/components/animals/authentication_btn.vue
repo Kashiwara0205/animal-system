@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-button size="mini" type="warning" @click="onClick" class="authentication-btn"> <i class="el-icon-warning"></i>  権限情報 </el-button>
-    <el-dialog title="権限情報に関して" :visible.sync="dialogTableVisible" width="80%">
+    <el-dialog title="権限情報に関して" :visible.sync="dialogVisible" width="80%">
       <span slot="title"><i class="el-icon-warning"></i> 権限情報</span>
       <el-table :data="list" border>
         <el-table-column property="name" label="機能名"></el-table-column>
@@ -18,7 +18,7 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class AuthenticationBtn extends Vue {
 
-  private dialogTableVisible = false
+  private dialogVisible = false
   private list = [
     { name: "追加機能", description: "動物データを追加する機能", authority: "リーダ以上が可能" },
     { name: "編集機能", description: "動物データを編集する機能", authority: "リーダ以上が可能"},
@@ -26,7 +26,7 @@ export default class AuthenticationBtn extends Vue {
     { name: "編集モード", description: "一覧にて、データを編集出来るようにする機能", authority: "リーダ以上が可能"},
   ]
 
-  onClick(){ this.dialogTableVisible = true }
+  onClick(){ this.dialogVisible = true }
 }
 </script>
 

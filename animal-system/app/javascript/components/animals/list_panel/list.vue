@@ -144,7 +144,7 @@ Vue.use(ElementUI);
     "weight": Weight,
     "height": Height,
     "edit-form": EditForm,
-    "delete-btn": DeleteBtn
+    "delete-btn": DeleteBtn,
   }
 })
 export default class List extends Vue {

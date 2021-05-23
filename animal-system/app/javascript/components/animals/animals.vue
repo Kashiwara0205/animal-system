@@ -19,6 +19,7 @@
 
       <list-panel
         @fetchInfo="fetchInfo"
+        :query="query"
         :animal-model="animal"
         :info = "info"
         :loading = "loading"

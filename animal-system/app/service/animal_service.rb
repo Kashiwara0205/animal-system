@@ -12,6 +12,13 @@ class AnimalService
     [info, count]
   end
 
+  def get_csv query:
+    records = @animal_repo.get_all(query: query)
+    info = records.map { |m| m.attributes }
+
+    info
+  end
+
   def update id:, info:
     @animal_repo.update(id: id, info: info)
     @animal_repo.find(id: id).attributes
