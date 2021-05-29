@@ -32,7 +32,7 @@ class AnimalRepository
     end
 
     def get_count query:
-      Animal.ransack(query).result.size
+      Animal.where(visible: true).ransack(query).result.size
     end
 
     private 

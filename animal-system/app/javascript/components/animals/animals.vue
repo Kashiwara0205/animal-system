@@ -1,36 +1,37 @@
 <template>
   <div id="base" v-loading.fullscreen.lock="!completeInit" element-loading-text="Loading...">
-    <div v-if="completeInit">
-  
-      <table>
-        <tr>
-          <td> <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> </td>
-          <td> <authentication-btn></authentication-btn> </td>
-        </tr>
-      </table>
+    <el-tabs type="border-card" class="local-navigation">
+      <el-tab-pane label="一覧表示">
 
-      <search-panel v-bind.sync="query"
-        @search="fetchInfo"
-        :animal-type-list = "animalTypeList"
-        :countory-list = "countoryList"
-        v-bind:offset.sync="offset"
-      >
-      </search-panel>
+        <div v-if="completeInit">
+          <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> 
 
-      <list-panel
-        @fetchInfo="fetchInfo"
-        :query="query"
-        :animal-model="animal"
-        :info = "info"
-        :loading = "loading"
-        :animalTypeList = "animalTypeList"
-        :countoryList = "countoryList"
-        :total = "total"
-        v-bind:offset.sync="offset"
-      >
-      </list-panel>
+          <search-panel v-bind.sync="query"
+           @search="fetchInfo"
+          :animal-type-list = "animalTypeList"
+          :countory-list = "countoryList"
+          v-bind:offset.sync="offset">
+          </search-panel>
+
+          <list-panel
+             @fetchInfo="fetchInfo"
+            :query="query"
+            :animal-model="animal"
+            :info = "info"
+            :loading = "loading"
+            :animalTypeList = "animalTypeList"
+            :countoryList = "countoryList"
+            :total = "total"
+            v-bind:offset.sync="offset">
+          </list-panel>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="権限情報">
+        <authentication-table></authentication-table>
+      </el-tab-pane>
+    </el-tabs>
       
-    </div>
+
   </div>
 </template>
 
@@ -38,7 +39,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import SearchPanel from "../animals/search_panel/search_panel.vue"
 import ListPanel from "../animals/list_panel/panel.vue"
-import AuthenticationBtn from "../animals/authentication_btn.vue"
+import AuthenticationTable from "../animals/authentication_table.vue"
 import Pagination from "../utils/pagination.vue"
 import Animal from "../../model/animal"
 import AnimalType from "../../model/animal_type"
@@ -49,7 +50,7 @@ import utils from "../../lib/utils"
 
 @Component({
   components:{ 
-    "authentication-btn": AuthenticationBtn,
+    AuthenticationTable,
     "list-panel": ListPanel,
     "search-panel": SearchPanel,
   }
@@ -145,8 +146,10 @@ export default class Animals extends Vue {
 }
 
 .title{
-  padding-left: 15px; 
-  margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.local-navigation{
+  margin-top: 5px;
 }
 </style>

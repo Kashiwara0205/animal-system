@@ -5,6 +5,10 @@
     </h3>
     <el-tabs :tab-position="tabPosition" style="height: 350px;" type="border-card">
       <el-tab-pane label="2021-05" class="panel" >
+        <b> 05月29日 </b>
+        <li> [動物情報 一覧] ローカルナビケージョンを追加して、そちらに権限情報を移動 <br>
+        <br>
+        
         <b> 05月22日 </b>
         <li>登録フォームを追加 <br>
 
