@@ -46,7 +46,7 @@ import List from "../list_panel/list.vue"
 import RegisterForm from "../list_panel/form/register_form.vue"
 import DownloadBtn from "./download_btn.vue"
 import Pagination from "../../utils/pagination.vue"
-import { HAIR_LIST } from "../../../const"
+import { HAIR_LIST } from "../../../const/common"
 
 @Component({
   components:{ 

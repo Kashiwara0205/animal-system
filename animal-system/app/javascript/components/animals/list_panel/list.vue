@@ -130,7 +130,7 @@ import Height from "./edit_mode/height.vue"
 import EditForm from "./form/edit_form.vue"
 import DeleteBtn from "./delete_btn.vue"
 
-import utils from "../../../lib/utils"
+import utils from "../../../lib/utils/common"
 import moment from 'moment/moment'
 
 Vue.use(ElementUI);

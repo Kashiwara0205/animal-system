@@ -82,7 +82,8 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ElementUI from 'element-ui';
-import { HAIR_LIST } from "../../../const"
+import { HAIR_LIST } from "../../../const/common"
+import { createQueryForm } from "../../../lib/utils/form_builder/animals"
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
@@ -92,23 +93,8 @@ export default class SearchPanel extends Vue {
   @Prop({ required: true }) animalTypeList
   @Prop({ required: true }) countoryList
 
-  private query = this.createNewQuery()
+  private query = createQueryForm()
   private hairList = HAIR_LIST
-
-  createNewQuery(){
-    return {
-      name_cont: "",
-      animal_type_id_eq_any: [],
-      countory_id_eq_any: [],
-      hair_eq_any: [],
-      weight_gteq: "",
-      weight_lteq: "",
-      height_gteq: "",
-      height_lteq: "",
-      created_at_gteq: "",
-      updated_at_gteq: ""
-    }
-  }
 
   onSearch(){
     this.updateParentQuery()
@@ -118,7 +104,7 @@ export default class SearchPanel extends Vue {
   }
 
   onClear(){
-    this.query = this.createNewQuery()
+    this.query = createQueryForm()
     this.updateParentQuery()
 
     this.$emit('update:offset', 0)
@@ -126,7 +112,7 @@ export default class SearchPanel extends Vue {
   }
 
   updateParentQuery(){
-    Object.keys(this.query).forEach(key => this.$emit(`update:${key}`, this.query[key]))
+    this.$emit(`update:query`, this.query)
   }
 }
 </script>

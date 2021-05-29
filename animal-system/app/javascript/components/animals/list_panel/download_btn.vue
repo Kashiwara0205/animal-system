@@ -10,7 +10,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import http from '../../../lib/http'
 import notifier from '../../../lib/notifier' 
-import utils from "../../../lib/utils"
+import utils from "../../../lib/utils/common"
 import moment from 'moment/moment'
 
 @Component

@@ -6,11 +6,12 @@
         <div v-if="completeInit">
           <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> 
 
-          <search-panel v-bind.sync="query"
-           @search="fetchInfo"
-          :animal-type-list = "animalTypeList"
-          :countory-list = "countoryList"
-          v-bind:offset.sync="offset">
+          <search-panel 
+             v-bind:query.sync="query"
+             v-bind:offset.sync="offset"
+             @search="fetchInfo"
+            :animal-type-list = "animalTypeList"
+            :countory-list = "countoryList">
           </search-panel>
 
           <list-panel
@@ -46,7 +47,8 @@ import AnimalType from "../../model/animal_type"
 import Countory from "../../model/countory"
 import http from '../../lib/http'
 import notifier from '../../lib/notifier' 
-import utils from "../../lib/utils"
+import utils from "../../lib/utils/common"
+import { createQueryForm } from "../../lib/utils/form_builder/animals"
 
 @Component({
   components:{ 
@@ -56,6 +58,7 @@ import utils from "../../lib/utils"
   }
 })
 export default class Animals extends Vue {
+
   private title = "動物情報 一覧"
 
   private animal = new Animal
@@ -69,18 +72,7 @@ export default class Animals extends Vue {
   private total = 0
   private offset = 0
 
-  private query = {
-    name_cont: "",
-    animal_type_id_eq_any: [],
-    countory_id_eq_any: [],
-    hair_eq_any: [],
-    weight_gteq: "",
-    weight_lteq: "",
-    height_gteq: "",
-    height_lteq: "",
-    created_at_gteq: "",
-    updated_at_gteq: ""
-  }
+  private query = createQueryForm()
 
   private loading = false
   private completeInit = false
