@@ -2,27 +2,32 @@ class QuestionRepository
   class << self
     def get limit:, offset:, query:
       merged_question_table()
-            .limit(limit)
-            .offset(offset)
-            .order(created_at: "DESC")
-            .ransack(query)
-            .result
+        .limit(limit)
+        .offset(offset)
+        .group("questions.id")
+        .order(phase: "ASC")
+        .order(created_at: "DESC")
+        .ransack(query)
+        .result
     end
 
-    def test
-      merged_question_table()
+    def get_count query:
+      merged_question_table().group("questions.id").ransack(query).result.length
     end
 
-    private
+    private 
 
     def merged_question_table
       Question.joins(:member)
               .joins(question_tags: :tag)
-              .select("questions.title",
+              .select("questions.id",
+                      "questions.title",
                       "questions.content",
+                      "questions.phase",
                       "members.name as member_name",
-                      "GROUP_CONCAT(tags.name) as tag_name")
-              .group("questions.id")
+                      "questions.created_at",
+                      "questions.updated_at",
+                      "GROUP_CONCAT(#{Tag.table_name}.name) as tag_name")
     end
   end
 end

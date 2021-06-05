@@ -7,5 +7,9 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
+    execute <<-SQL
+      ALTER TABLE `questions` ADD phase ENUM('new', 'doing', 'done') NOT NULL;
+    SQL
   end
 end

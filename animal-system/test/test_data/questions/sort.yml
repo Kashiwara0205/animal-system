@@ -1,0 +1,45 @@
+NewPhase:
+  Member:
+    loop: 3
+    col:
+      name: ["Aさん", "Bさん", "Cさん"]
+  Question:
+    loop: 3
+    col:
+      member_id: F|Member
+      title: ["Aの件", "Bの件", "Cの件"]
+      created_at: ["2020-04-01 10:30", "2020-04-01 16:30", "2020-06-01 10:30"]
+      phase: new
+  QuestionTag:
+    loop: 5
+    col:
+      question_id: [1, 1, 2, 3, 3]
+      tag_id: [2, 1, 4, 5, 6]
+
+DoingPhase:
+  Question:
+    loop: 2
+    col:
+      member_id: F|Member
+      title: ["Dの件", "Eの件"]
+      created_at: ["2021-03-01 10:30", "2021-05-01 16:30"]
+      phase: doing
+  QuestionTag:
+    loop: 5
+    col:
+      question_id: <maked[:DoingPhase][:Question][:id]>
+      tag_id: [7, 3]
+
+DonePhase:
+  Question:
+    loop: 1
+    col:
+      member_id: F|Member
+      title: ["Fの件"]
+      created_at: ["2022-03-01 10:30"]
+      phase: done
+  QuestionTag:
+    loop: 5
+    col:
+      question_id: <maked[:DonePhase][:Question][:id]>
+      tag_id: [2]

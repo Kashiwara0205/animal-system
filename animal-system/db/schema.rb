@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_005234) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.column "phase", "enum('new','doing','done')", null: false
     t.index ["member_id"], name: "index_questions_on_member_id"
   end
 

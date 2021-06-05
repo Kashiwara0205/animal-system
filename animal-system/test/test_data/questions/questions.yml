@@ -1,0 +1,17 @@
+Default:
+  Member:
+    loop: 5
+    col:
+      name: ["Aさん", "Bさん", "Cさん", "Dさん", "Eさん"]
+  Question:
+    loop: 10
+    col:
+      member_id: F|Member
+      title: ["Aの件", "Bの件", "Cの件", "Dの件"]
+      content: ["ACONTENT", "xxxxxx", "wss", "BCONTENT"]
+      created_at: ["2020-04-01 10:30", "2020-04-01 16:30", "2020-06-01 10:30"]
+  QuestionTag:
+    loop: 13
+    col:
+      question_id: F|Question
+      tag_id: [2, 1, 4, 5, 6, 4, 3]
