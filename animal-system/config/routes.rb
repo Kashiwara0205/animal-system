@@ -9,11 +9,14 @@ Rails.application.routes.draw do
         get 'csv'
       end
 
+      resources :questions, only: [:index]
+
       resources :countories, only: [:index] 
     end
   end
 
   # Index
   root 'top#index'
-  resources :animals, only: [:index] 
+  resources :animals, only: [:index]
+  resources :questions, only: [:index] 
 end

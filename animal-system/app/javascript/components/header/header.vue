@@ -15,6 +15,12 @@
           <i class="el-icon-document"></i> 動物情報 一覧
         </el-menu-item>
       </el-submenu>
+      <el-submenu index="4">
+        <template slot="title">メンバー関連</template>
+        <el-menu-item index="/questions">
+          <i class="el-icon-document"></i> 質問情報 一覧
+        </el-menu-item>
+      </el-submenu>
       <!--
       <el-submenu index="3">
         <template slot="title">イベント関連</template>
@@ -22,14 +28,6 @@
           <i class="el-icon-document"></i> イベント情報 一覧
         </el-menu-item>
       </el-submenu>
-      <el-submenu index="4">
-        <template slot="title">メンバーシップ関連</template>
-        <el-menu-item index="/members">
-          <i class="el-icon-document"></i> メンバーシップ情報 一覧
-        </el-menu-item>
-        <el-menu-item index="/member_graphs">
-          <i class="el-icon-s-data"></i>メンバーシップ登録グラフ   
-        </el-menu-item>
       </el-submenu>
       <el-submenu index="5">
         <template slot="title">その他</template>
