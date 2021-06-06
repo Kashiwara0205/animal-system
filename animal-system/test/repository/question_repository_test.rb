@@ -81,4 +81,80 @@ class QuestionRepositoryTest < ActiveSupport::TestCase
     assert_equal 3, records.length
   end
 
+  # 期待値: 想定するレコードのヒット件数と一致すること
+  test "タイトルの名前検索に関して担保する" do 
+    Pokotarou.execute("./test/test_data/questions/questions.yml")
+
+    query = { title_cont: "Aの件" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 3, records.length
+
+    query = { title_cont: "Bの件" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 3, records.length
+
+    query = { title_cont: "Cの件" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 2, records.length
+  end
+
+  # 期待値: 想定するレコードのヒット件数と一致すること
+  test "内容検索に関して担保する" do 
+    Pokotarou.execute("./test/test_data/questions/questions.yml")
+
+    query = { content_cont: "CONTENT" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 5, records.length
+
+    query = { content_cont: "xxxxxx" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 3, records.length
+  end
+
+  # 期待値: 想定するレコードのヒット件数と一致すること
+  test "質問者名の検索に関して担保する" do 
+    Pokotarou.execute("./test/test_data/questions/questions.yml")
+
+    query = { member_name_cont: "Aさん" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 2, records.length
+
+    query = { member_name_cont: "Eさん" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 2, records.length
+  end
+
+  # 期待値: 想定するレコードのヒット件数と一致すること
+  test "段階の検索に関して担保する" do 
+    Pokotarou.execute("./test/test_data/questions/questions.yml")
+
+    query = { phase_eq: "new" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 4, records.length
+
+    query = { phase_eq: "doing" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 3, records.length
+
+    query = { phase_eq: "done" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 3, records.length
+  end
+
+  # 期待値: 想定するレコードのヒット件数と一致すること
+  test "登録日時の検索に関して担保する" do 
+    Pokotarou.execute("./test/test_data/questions/questions.yml")
+
+    query = { created_at_gteq: "2020-04-01 16:00" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 6, records.length
+
+    query = { created_at_gteq: "2020-03-01 16:00" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 10, records.length
+
+    query = { created_at_gteq: "2020-06-01 16:00" }
+    records = QuestionRepository.get(limit: 10, offset: 0, query: query)
+    assert_equal 0, records.length
+  end
 end

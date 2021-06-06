@@ -10,6 +10,7 @@ Default:
       title: ["Aの件", "Bの件", "Cの件", "Dの件"]
       content: ["ACONTENT", "xxxxxx", "wss", "BCONTENT"]
       created_at: ["2020-04-01 10:30", "2020-04-01 16:30", "2020-06-01 10:30"]
+      phase: [new, doing, done]
   QuestionTag:
     loop: 13
     col:
