@@ -4,7 +4,8 @@
       v-bind:dialogVisible.sync="contentDialogVisible" 
       :title="title"
       :content="content" 
-      :memberName="memberName"></content-dialog>
+      :memberName="memberName">
+    </content-dialog>
 
     <el-table
       :data="questions"
