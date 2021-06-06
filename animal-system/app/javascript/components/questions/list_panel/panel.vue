@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-tabs type="border-card">
       <el-tab-pane>
         <span slot="label"><i class="el-icon-document"></i> 一覧表示</span>
