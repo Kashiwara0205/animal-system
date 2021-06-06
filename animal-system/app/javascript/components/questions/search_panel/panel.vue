@@ -32,7 +32,7 @@
       <br>
 
       <el-row :gutter="20">
-        <el-col :span="5"> <el-input placeholder="質問内容" v-model="query.content_cont"></el-input> </el-col>
+        <el-col :span="15"> <el-input placeholder="質問内容" type="textarea" v-model="query.content_cont"></el-input> </el-col>
       </el-row>
 
       <br>
