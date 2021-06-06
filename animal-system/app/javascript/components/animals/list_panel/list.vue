@@ -102,8 +102,8 @@
         </template>
       </el-table-column>
       
-      <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetime"> </el-table-column>
-      <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetime"> </el-table-column>
+      <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetimeEl"> </el-table-column>
+      <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetimeEl"> </el-table-column>
       <el-table-column label="操作" width="150px"> 
         <template slot-scope="scope">
            <el-button size="small" @click="onClickEditBtn(scope.$index, scope.row)">編集</el-button>
@@ -131,6 +131,7 @@ import EditForm from "./form/edit_form.vue"
 import DeleteBtn from "./delete_btn.vue"
 
 import utils from "../../../lib/utils/common"
+import { formatDateTime } from "../../../lib/utils/formatter"
 import moment from 'moment/moment'
 
 Vue.use(ElementUI);
@@ -230,9 +231,7 @@ export default class List extends Vue {
     load.next()
   }
 
-  private formatDatetime(row, col, value, index){
-    return moment(value).format("YYYY-MM-DD HH:mm")
-  }
+  private formatDatetimeEl(row, col, value, index){ return formatDateTime(value) }
 }
 </script>
 

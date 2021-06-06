@@ -6,73 +6,44 @@
         <div v-if="completeInit">
           <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> 
 
-          <search-panel 
-             v-bind:query.sync="query"
-             v-bind:offset.sync="offset"
-             @search="fetchInfo"
-            :animal-type-list = "animalTypeList"
-            :countory-list = "countoryList">
-          </search-panel>
-
           <list-panel
              @fetchInfo="fetchInfo"
-            :query="query"
-            :animal-model="animal"
+            :question-model="question"
             :info = "info"
             :loading = "loading"
-            :animalTypeList = "animalTypeList"
-            :countoryList = "countoryList"
             :total = "total"
             v-bind:offset.sync="offset">
           </list-panel>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="権限情報">
-        <authorization-table></authorization-table>
-      </el-tab-pane>
     </el-tabs>
-      
-
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import SearchPanel from "../animals/search_panel/search_panel.vue"
-import ListPanel from "../animals/list_panel/panel.vue"
-import AuthorizationTable from "../animals/authorization_table.vue"
+import ListPanel from "../questions/list_panel/panel.vue"
 import Pagination from "../utils/pagination.vue"
-import Animal from "../../model/animal"
-import AnimalType from "../../model/animal_type"
-import Countory from "../../model/countory"
+import Question from "../../model/question"
 import http from '../../lib/http'
 import notifier from '../../lib/notifier' 
 import utils from "../../lib/utils/common"
-import { createQueryForm } from "../../lib/utils/form_builder/animals"
 
 @Component({
   components:{ 
-    AuthorizationTable,
-    "list-panel": ListPanel,
-    "search-panel": SearchPanel,
+    "list-panel": ListPanel
   }
 })
-export default class Animals extends Vue {
+export default class Questions extends Vue {
 
-  private title = "動物情報 一覧"
+  private title = "質問情報 一覧"
 
-  private animal = new Animal
-  private animalType = new AnimalType
-  private countory = new Countory
+  private question = new Question
 
   private info = []
-  private animalTypeList = []
-  private countoryList = []
 
   private total = 0
   private offset = 0
-
-  private query = createQueryForm()
 
   private loading = false
   private completeInit = false
@@ -84,25 +55,17 @@ export default class Animals extends Vue {
     this.completeInit = false
 
     try{
-      const url = this.animal.getListUrl()
+      const url = this.question.getListUrl()
       const params = { offset: this.offset, limit: 50, query: this.query }
-
-      const animalTypeUrl = this.animalType.getListUrl()
-      const countoryUrl = this.countory.getListUrl()
 
       const requestList = [
         { url: url, params: params }, 
-        { url: animalTypeUrl, params: {} },
-        { url: countoryUrl, params: {} },
       ]
       
       const res = await http.getAll(requestList);
 
       this.info = res[0]["data"]["info"]
       this.total = res[0]["data"]["count"]
-
-      this.animalTypeList = res[1]["data"]
-      this.countoryList = res[2]["data"]
 
     }catch(e){
       notifier.notifyError(this)
@@ -117,7 +80,7 @@ export default class Animals extends Vue {
     this.loading = true
 
     try{
-      const url = this.animal.getListUrl()
+      const url = this.question.getListUrl()
       const params = { offset: this.offset, limit: 50, query: this.query }
       const res = await http.get(url, params);
       this.info = res["data"]["info"]

@@ -13,7 +13,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class AuthenticationBtn extends Vue {
+export default class AuthorizationTable extends Vue {
   private list = [
     { name: "追加機能", description: "動物データを追加する機能", authority: "リーダ以上が可能" },
     { name: "編集機能", description: "動物データを編集する機能", authority: "リーダ以上が可能"},
