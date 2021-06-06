@@ -6,12 +6,20 @@
         <div v-if="completeInit">
           <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> 
 
+          <search-panel 
+             v-bind:query.sync="query"
+             v-bind:offset.sync="offset"
+             @search="fetchInfo"
+            :phase-list = "phaseList">
+          </search-panel>
+
           <list-panel
              @fetchInfo="fetchInfo"
             :question-model="question"
             :info = "info"
             :loading = "loading"
             :total = "total"
+            :phase-list = "phaseList"
             v-bind:offset.sync="offset">
           </list-panel>
         </div>
@@ -23,15 +31,19 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import ListPanel from "../questions/list_panel/panel.vue"
+import SearchPanel from "../questions/search_panel/panel.vue"
 import Pagination from "../utils/pagination.vue"
 import Question from "../../model/question"
 import http from '../../lib/http'
 import notifier from '../../lib/notifier' 
 import utils from "../../lib/utils/common"
+import { createQueryForm } from "../../lib/utils/form_builder/question"
+import { PHASE_LIST } from "../../const/common"
 
 @Component({
   components:{ 
-    "list-panel": ListPanel
+    ListPanel,
+    SearchPanel
   }
 })
 export default class Questions extends Vue {
@@ -47,6 +59,9 @@ export default class Questions extends Vue {
 
   private loading = false
   private completeInit = false
+
+  private query = createQueryForm()
+  private phaseList = PHASE_LIST
 
   created(){ this.fetchInitialInfo() }
 

@@ -21,7 +21,6 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import List from "../list_panel/list.vue"
 import Pagination from "../../utils/pagination.vue"
-import { PHASE_LIST } from "../../../const/common"
 
 @Component({
   components:{ 
@@ -31,13 +30,13 @@ import { PHASE_LIST } from "../../../const/common"
 })
 export default class Panel extends Vue {
   @Prop({ required: true }) questionModel
+  @Prop({ required: true }) phaseList
   @Prop({ required: true }) info
   @Prop({ required: true }) loading
   @Prop({ required: true }) total
   @Prop({ required: true }) offset
 
   private paginationOffset = 0
-  private phaseList = PHASE_LIST
 
   private fetchInfo(){ 
     this.$emit('update:offset', this.paginationOffset)
