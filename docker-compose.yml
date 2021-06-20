@@ -24,6 +24,15 @@ services:
     stdin_open: true
     tty: true
 
+  recommendation-stystem:
+    build: ./recommendation-system
+    container_name: recommendation-system
+    command: sh entrypoint.sh
+    volumes:
+      - ./recommendation-system:/recommendation-system
+    ports:
+      - "5555:5555"
+
   webpack:
     <<: *copy-animal-system
     command: "bin/webpack-dev-server"
