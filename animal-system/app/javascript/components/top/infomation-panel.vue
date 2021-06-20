@@ -3,8 +3,12 @@
     <h3 style="padding-top:10px;">
       <i class="el-icon-news"></i> 更新履歴
     </h3>
-    <el-tabs :tab-position="tabPosition" style="height: 350px;" type="border-card">
+    <el-tabs :tab-position="tabPosition" style="height: 80vh;" type="border-card">
       <el-tab-pane label="2021-06" class="panel" >
+        <b> 06月20日 </b>
+        <li> 更新履歴の高さを350pxから80vhに変更</li>
+        <li> 類似質問の抽出機能を入れるためにpytonのマイクロサービス追加</li>
+        <br>
         <b> 06月06日 </b>
         <li> 質問情報一覧を追加</li>
         レコメンデーション機能を応用して以下の2つの機能を実装予定<br>
@@ -52,28 +56,8 @@
         <li>更新履歴表示機能を追加</li>
       </el-tab-pane>
       <el-tab-pane label="2021-04" class="panel">
-        <b> 04月24日 </b>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
         <b> 04月23日 </b>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
-        <li>テスト表示</li>
+        <li>実験システム立ち上げ</li>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -95,6 +79,6 @@ export default class InfomationPanel extends Vue {
 <style scoped>
   .panel{
     overflow: scroll; 
-    height: 330px;
+    height: 80vh;
   }
 </style>
