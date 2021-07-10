@@ -21,11 +21,13 @@ app = Flask(__name__)
 def get_similarity_question(id):
   service = QuestionService(Question)
 
+  print("-------------------", flush=True)
   for record in service.recommendation(id):
-    print("xxxxxxxxxxxxxx")
-    print(record)
-    print("xxxxxxxxxxxxxx")
-    
+    print("xxxxxxxxxxxxxx", flush=True)
+    print(record, flush=True)
+    print("xxxxxxxxxxxxxx", flush=True)
+  print("-------------------", flush=True)
+
   return 'User %d' % id
 
 if __name__ == "__main__":

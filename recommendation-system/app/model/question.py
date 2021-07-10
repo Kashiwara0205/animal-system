@@ -25,7 +25,7 @@ class Question:
     row = None
 
     try:
-      row = conn.execute("SELECT * FROM questions").fetchone()
+      row = conn.execute("SELECT * FROM questions WHERE id = %s", question_id).fetchone()
     except Exception as e:
       print(e)
     finally:

@@ -2,3 +2,6 @@ flask
 sqlalchemy
 typing
 pymysql==0.9.3
+pandas
+sklearn
+mecab-python3
