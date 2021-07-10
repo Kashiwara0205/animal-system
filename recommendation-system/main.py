@@ -1,3 +1,6 @@
+from app.model.question import Question
+from app.service.question_service import QuestionService
+
 from flask import Flask
 
 app = Flask(__name__)
@@ -16,6 +19,13 @@ app = Flask(__name__)
 # example: curl localhost:5555/api/v1/similarity_question/3
 @app.route('/api/v1/similarity_question/<int:id>', methods=['GET'])
 def get_similarity_question(id):
+  service = QuestionService(Question)
+
+  for record in service.recommendation(id):
+    print("xxxxxxxxxxxxxx")
+    print(record)
+    print("xxxxxxxxxxxxxx")
+    
   return 'User %d' % id
 
 if __name__ == "__main__":

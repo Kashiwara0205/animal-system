@@ -138,7 +138,7 @@ export default class Animals extends Vue {
 }
 
 .title{
-  margin-bottom: 15px;
+  margin-top: 5px;
 }
 
 .local-navigation{

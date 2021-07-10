@@ -25,6 +25,6 @@ export default class AuthorizationTable extends Vue {
 
 <style scoped>
 .title{
-  margin-bottom: 15px;
+  margin-top: 5px;
 }
 </style>

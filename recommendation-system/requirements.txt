@@ -1,1 +1,4 @@
 flask
+sqlalchemy
+typing
+pymysql==0.9.3

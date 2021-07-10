@@ -1,3 +1,2 @@
 #!/bin/sh
-
-cd code; python app.py
+python main.py
