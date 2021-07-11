@@ -8,33 +8,43 @@ class QuestionService:
   def __init__(self, question_m):
     self.question_m = question_m
 
-  def recommendation(self, question_id):
+  def recommend(self, question_id):
     all_question = self.question_m.get_all()
+    question_df = self.__create_question_df(all_question)
 
+    return {
+      "content_base": self.__question_based_recommend(question_df, "content_nouns", question_id),
+      "title_base": self.__question_based_recommend(question_df, "title_nouns", question_id),
+    }
+
+  def __create_question_df(self, all_question):
     data_frame = {
       "id": [],
       "title": [],
-      "content": []
+      "title_nouns": [],
+      "content_nouns": []
     }
-    
-    m = MeCab.Tagger()
 
     for record in all_question:
       data_frame["id"].append(record[1])
       data_frame["title"].append(record[2])
 
-      nouns = [line for line in m.parse(record[3]).splitlines()
-               if "名詞" in line.split()[-1]]
+      nouns = self.__get_nouns(record[2])
+      data_frame["title_nouns"].append(reduce(lambda a, b: a + b, nouns) )
 
-      data_frame["content"].append(reduce(lambda a, b: a + b, nouns) )
+      nouns = self.__get_nouns(record[3])
+      data_frame["content_nouns"].append(reduce(lambda a, b: a + b, nouns) )
 
-    df = pd.DataFrame(data_frame)
+    return pd.DataFrame(data_frame)
 
-    tfids = TfidfVectorizer(stop_words="english")
-    tfidf_matrix = tfids.fit_transform(df['content'])
+  def __get_nouns(self, column):
+    m = MeCab.Tagger()
+    return [line for line in m.parse(column).splitlines() if "名詞" in line.split()[-1]]
+
+  def __question_based_recommend(self, df, key, question_id):
+    tfids = TfidfVectorizer()
+    tfidf_matrix = tfids.fit_transform(df[key])
     cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
-
-    print(pd.DataFrame(tfidf_matrix.toarray(), columns=tfids.get_feature_names()), flush=True)
 
     indicies = pd.Series(df.index, index=df['id'])
 

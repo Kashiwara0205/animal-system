@@ -21,11 +21,17 @@ app = Flask(__name__)
 def get_similarity_question(id):
   service = QuestionService(Question)
 
+  res = service.recommend(id)
+  print("RECOMMEND FROM CONTENT")
   print("-------------------", flush=True)
-  for record in service.recommendation(id):
-    print("xxxxxxxxxxxxxx", flush=True)
+  for record in res["content_base"]:
     print(record, flush=True)
-    print("xxxxxxxxxxxxxx", flush=True)
+  print("-------------------", flush=True)
+
+  print("RECOMMEND FROM TITLE")
+  print("-------------------", flush=True)
+  for record in res["title_base"]:
+    print(record, flush=True)
   print("-------------------", flush=True)
 
   return 'User %d' % id
