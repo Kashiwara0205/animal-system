@@ -41,8 +41,12 @@ ActiveRecord::Schema.define(version: 2021_06_05_005234) do
 
   create_table "members", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
+    t.date "birthday"
+    t.boolean "has_pet"
+    t.boolean "married"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.column "sex", "enum('male','female')", null: false
   end
 
   create_table "question_tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

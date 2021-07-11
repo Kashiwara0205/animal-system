@@ -22,6 +22,7 @@ def get_similarity_question(id):
   service = QuestionService(Question)
 
   res = service.recommend(id)
+
   print("RECOMMEND FROM CONTENT")
   print("-------------------", flush=True)
   for record in res["content_base"]:
@@ -31,6 +32,12 @@ def get_similarity_question(id):
   print("RECOMMEND FROM TITLE")
   print("-------------------", flush=True)
   for record in res["title_base"]:
+    print(record, flush=True)
+  print("-------------------", flush=True)
+
+  print("RECOMMEND FROM MEMBER")
+  print("-------------------", flush=True)
+  for record in res["member_base"]:
     print(record, flush=True)
   print("-------------------", flush=True)
 

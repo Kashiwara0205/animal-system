@@ -7,29 +7,24 @@ class Question:
     engine = get_engine()
     conn = engine.connect()
     rows = []
-
     try:
-      rows = conn.execute("SELECT * FROM questions")
-    except e:
-      print(e)
-    finally:
-      conn.close()
-      engine.dispose()
+      result = conn.execute("\
+        SELECT questions.id,\
+               questions.title,\
+               questions.content,\
+               members.has_pet,\
+               members.sex,\
+               members.married\
+        FROM questions \
+        INNER JOIN members ON members.id = questions.member_id")
+
+      for x in result:
+        rows.append([x[0], x[1], x[2], x[3], x[4], x[5]])
       
-    return rows
-
-  @classmethod
-  def find(cls, question_id):
-    engine = get_engine()
-    conn = engine.connect()
-    row = None
-
-    try:
-      row = conn.execute("SELECT * FROM questions WHERE id = %s", question_id).fetchone()
     except Exception as e:
       print(e)
     finally:
       conn.close()
       engine.dispose()
-      
-    return row
+
+    return rows
