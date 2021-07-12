@@ -2,8 +2,10 @@ from app.model.question import Question
 from app.service.question_service import QuestionService
 
 from flask import Flask
+from flask import jsonify
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 # 類似性の高い質問を返す
 # 以下の２つのフィルタリングから構成
@@ -23,25 +25,7 @@ def get_similarity_question(id):
 
   res = service.recommend(id)
 
-  print("RECOMMEND FROM CONTENT")
-  print("-------------------", flush=True)
-  for record in res["content_base"]:
-    print(record, flush=True)
-  print("-------------------", flush=True)
-
-  print("RECOMMEND FROM TITLE")
-  print("-------------------", flush=True)
-  for record in res["title_base"]:
-    print(record, flush=True)
-  print("-------------------", flush=True)
-
-  print("RECOMMEND FROM MEMBER")
-  print("-------------------", flush=True)
-  for record in res["member_base"]:
-    print(record, flush=True)
-  print("-------------------", flush=True)
-
-  return 'User %d' % id
+  return res
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=5555, debug=True)

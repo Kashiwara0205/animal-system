@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import pandas as pd
 import MeCab
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -85,7 +87,11 @@ class QuestionService:
     
     question_indices = [i[0] for i in  sim_scores]
     
-    return df['title'].iloc[question_indices]
+    titles = []
+    for x in df['title'].iloc[question_indices]:
+      titles.append(x)
+
+    return titles
 
   def __member_based_recommend(self, df, question_id):
     count = CountVectorizer()
@@ -103,4 +109,8 @@ class QuestionService:
     
     question_indices = [i[0] for i in  sim_scores]
 
-    return df['title'].iloc[question_indices]
+    titles = []
+    for x in df['title'].iloc[question_indices]:
+      titles.append(x)
+
+    return titles

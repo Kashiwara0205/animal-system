@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       end
 
       resources :questions, only: [:index]
+      namespace :questions do 
+        get 'recommend'
+      end
       resources :countories, only: [:index] 
     end
   end
