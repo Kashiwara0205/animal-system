@@ -7,6 +7,12 @@
       :memberName="memberName">
     </content-dialog>
 
+    <similar-question
+      v-bind:dialogVisible.sync="similarQuestionDialogVisible"
+      :title="title"
+      :id="questionId" >
+    </similar-question>
+
     <el-table
       :data="questions"
       @hook:mounted="complete"
@@ -28,6 +34,11 @@
       <el-table-column label="対応" prop="phase" :formatter="formatPhaseEl"></el-table-column>
       <el-table-column label="質問日時" prop="created_at" :formatter="formatDatetimeEl"></el-table-column>
       <el-table-column label="最終対応日時" prop="updated_at" :formatter="formatDatetimeEl" ></el-table-column>
+      <el-table-column label="操作" align="center" width="150px"> 
+        <template slot-scope="scope">
+           <el-button size="small" @click="onClickSimilarQuestion(scope.row)">類似質問</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -37,10 +48,12 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { formatDateTime } from "../../../lib/utils/formatter"
 import utils from "../../../lib/utils/common"
 import ContentDialog from "./dialog/content.vue"
+import SimilarQuestion from "./similar_question.vue"
 
 @Component({
   components:{ 
-    ContentDialog
+    ContentDialog,
+    SimilarQuestion
   }
 })
 export default class List extends Vue {
@@ -49,10 +62,12 @@ export default class List extends Vue {
   @Prop({ required: true }) fetchLoading
 
   private paginationOffset = 0
+  private questionId = 0
   private questions = []
   private tableLoading = false
 
   private contentDialogVisible = false
+  private similarQuestionDialogVisible = false
 
   private phaseToLabel = {}
 
@@ -126,6 +141,12 @@ export default class List extends Vue {
     this.memberName = row.member_name
     this.title = row.title
     this.contentDialogVisible = true
+  }
+
+  private onClickSimilarQuestion(row){
+    this.similarQuestionDialogVisible = true
+    this.questionId = row.id
+    this.title = row.title
   }
 }
 </script>
