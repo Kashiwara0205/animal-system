@@ -4,6 +4,10 @@
       <i class="el-icon-news"></i> 更新履歴
     </h3>
     <el-tabs :tab-position="tabPosition" style="height: 80vh;" type="border-card">
+      <el-tab-pane label="2021-07" class="panel" >
+        <b> 07月19日 </b>
+        <li> プロトタイプのレコメンドシステムを追加</li>
+      </el-tab-pane>
       <el-tab-pane label="2021-06" class="panel" >
         <b> 06月20日 </b>
         <li> 更新履歴の高さを350pxから80vhに変更</li>
