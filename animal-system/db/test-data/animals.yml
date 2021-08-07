@@ -1,6 +1,6 @@
 TestData:
   Animal:
-    loop: 234
+    loop: 100000
     col:
       name: "動物太郎"
       animal_type_id: F|AnimalType

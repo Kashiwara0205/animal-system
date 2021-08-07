@@ -16,8 +16,7 @@ class Api::V1::AnimalsController < ApiController
     begin
       service = AnimalService.new(animal_repo: AnimalRepository)
       info = service.get_csv(query: params[:query])
-
-      render json: { info: info }, status: 200
+      render json: JSON.generate({ info: info }), status: 200
     rescue => e
       res = { errors: e }
       render json: res, status: 500

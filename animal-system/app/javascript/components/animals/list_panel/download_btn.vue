@@ -75,8 +75,11 @@ export default class DownloadBtn extends Vue {
 
   async fetchInfo(){
     try{
+      console.log("fetch info")
       const params = { query: this.query }
       const res = await http.get(this.url, params);
+
+      console.log(res)
       return res["data"]["info"]
     }catch(e){
       notifier.notifyError(this)

@@ -4,6 +4,23 @@
       <i class="el-icon-news"></i> 更新履歴
     </h3>
     <el-tabs :tab-position="tabPosition" style="height: 80vh;" type="border-card">
+      <el-tab-pane label="2021-08" class="panel" >
+        <b> 08月07日 </b>
+        <li> ActiveRecordConverterを実装 </li>
+        <br> map{|m| m.attributes}の動作を高速に処理することが出来る
+        <br> Gem化予定
+        <br>
+        <br>
+        <b> 08月06日 </b>
+        <li> 大量のCSVデータのダウンロードを高速にするために調査 </li>
+        <br> 改善前：5万レコード9秒かかる
+        <br> Railsがデフォルトで使っているJSONレンダリングは遅い
+        <br> 5万レコードのCSVダウンロード処理に関してJSON.generateに変更すると4秒ほど処理速度が縮まり5秒になった
+        <br> ※ただし、JSON.generateを使用するにはmap{|m| m.attributes}で配列に変換しておく必要あり
+        <br> 追記
+        <br> pluckを使った処理に変更すると3秒に縮まった
+        <br> pluckはフィールド名を引数にとるのでselectメソッドのフィールド名を自動で使いまわせる仕組みがほしい
+      </el-tab-pane>
       <el-tab-pane label="2021-07" class="panel" >
         <b> 07月19日 </b>
         <li> プロトタイプのレコメンドシステムを追加</li>
