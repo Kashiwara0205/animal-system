@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="success" size="mini" @click="onDownload"class="download-btn">
+    <el-button type="success" size="mini" @click="onDownload" class="download-btn">
       CSVダウンロード <i class="el-icon-download"></i>
     </el-button>
   </div>
