@@ -3,7 +3,8 @@
 
     <register-form 
       v-if="registerFormVisible"
-      v-bind:register-form-visible.sync="registerFormVisible"
+      @update:registerFormVisible='registerFormVisible = $event'
+      :register-form-visible="registerFormVisible"
       :url="animalModel.getUpdateUrl()"
       :animal-type-list="animalTypeList"
       :countory-list="countoryList"
@@ -24,7 +25,13 @@
         <el-button @click="registerFormVisible = true" size="small"> 新規追加 </el-button>
         <el-checkbox v-model="editMode" style="padding-left: 15px; padding-bottom: 15px;"> 編集モード</el-checkbox>
 
-        <pagination v-bind:offset.sync="paginationOffset" :total="total" @fetchInfo="fetchInfo" disp-message> </pagination>
+        <pagination 
+          @update:offset='paginationOffset = $event'
+          :offset="paginationOffset"
+          :total="total" 
+          @fetchInfo="fetchInfo" 
+          disp-message>
+        </pagination>
 
         <list :info="info" 
               :animalModel="animalModel"
@@ -57,6 +64,7 @@ import { HAIR_LIST } from "../../../const/common"
   }
 })
 export default class ListPanel extends Vue {
+
   @Prop({ required: true }) animalModel
   @Prop({ required: true }) info
   @Prop({ required: true }) loading

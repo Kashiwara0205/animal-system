@@ -3,7 +3,8 @@
 
     <edit-form 
       v-if="editFormVisible"
-      v-bind:edit-form-visible.sync="editFormVisible"
+      @update:editFormVisible='editFormVisible = $event'
+      :edit-form-visible=editFormVisible
       :edit-info="editRow.info"
       :url="animalModel.getUpdateUrl()"
       :animal-type-list="animalTypeList"
@@ -28,8 +29,11 @@
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :editMode="editMode"
-            v-bind:name.sync="scope.row.name"
-            v-bind:updatedAt.sync="scope.row.updated_at">
+            @update:updatedAt='scope.row.updated_at = $event'
+            :updated-at="scope.row.updated_at"
+            @update:name='scope.row.name = $event'
+            :name="scope.row.name"
+            >
           </animal-name>
         </template>
       </el-table-column>
@@ -42,8 +46,11 @@
             :animal-type-to-label="animalTypeToLabel"
             :editMode="editMode"
             :animal-type-list="animalTypeList"
-            v-bind:animalTypeId.sync="scope.row.animal_type_id"
-            v-bind:updatedAt.sync="scope.row.updated_at">
+            @update:animalTypeId='scope.row.animal_type_id = $event'
+            :animalTypeId="scope.row.animal_type_id"
+            @update:updatedAt='scope.row.updated_at = $event'
+            :updated-at="scope.row.updated_at"
+            >
           </animal-type>
         </template>
       </el-table-column>
@@ -56,8 +63,11 @@
             :countory-to-label="countoryToLabel"
             :editMode="editMode"
             :countory-list="countoryList"
-            v-bind:countoryId.sync="scope.row.countory_id"
-            v-bind:updatedAt.sync="scope.row.updated_at">
+            @update:countoryId='scope.row.countory_id = $event'
+            :countoryId="scope.row.countory_id"
+            @update:updatedAt='scope.row.updated_at = $event'
+            :updated-at="scope.row.updated_at"
+            >
           </countory>
         </template>
       </el-table-column>
@@ -68,9 +78,11 @@
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :editMode="editMode"
-            v-bind:weight.sync="scope.row.weight"
-            v-bind:updatedAt.sync="scope.row.updated_at">
-          >
+            @update:weight='scope.row.weight = $event'
+            :weight="scope.row.weight"
+            @update:updatedAt='scope.row.updated_at = $event'
+            :updated-at="scope.row.updated_at"
+            >
           </weight>
         </template>
       </el-table-column>
@@ -81,8 +93,10 @@
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
             :editMode="editMode"
-            v-bind:height.sync="scope.row.height"
-            v-bind:updatedAt.sync="scope.row.updated_at">
+            @update:height='scope.row.height = $event'
+            :height="scope.row.height"
+            @update:updatedAt='scope.row.updated_at = $event'
+            :updated-at="scope.row.updated_at"
           >
           </height>
         </template>
@@ -96,8 +110,11 @@
             :hair-to-label="hairToLabel"
             :editMode="editMode"
             :hair-list="hairList"
-            v-bind:hair.sync="scope.row.hair"
-            v-bind:updatedAt.sync="scope.row.updated_at">
+            @update:hair='scope.row.hair = $event'
+            :hair="scope.row.hair"
+            @update:updatedAt='scope.row.updated_at = $event'
+            :updated-at="scope.row.updated_at"
+            >
           </hair>
         </template>
       </el-table-column>

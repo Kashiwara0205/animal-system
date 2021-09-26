@@ -1,14 +1,16 @@
 <template>
   <div>
     <content-dialog 
-      v-bind:dialogVisible.sync="contentDialogVisible" 
+      @update:dialogVisible='contentDialogVisible = $event'
+      :dialog-visible="contentDialogVisible"
       :title="title"
       :content="content" 
       :memberName="memberName">
     </content-dialog>
 
     <similar-question
-      v-bind:dialogVisible.sync="similarQuestionDialogVisible"
+      @update:dialogVisible='similarQuestionDialogVisible = $event'
+      :dialog-visible="similarQuestionDialogVisible"
       :title="title"
       :id="questionId" >
     </similar-question>

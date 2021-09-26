@@ -1,6 +1,10 @@
 <template>
   <span>
-   <el-dialog :title="title" :before-close="onClose" :visible.sync="dialogVisible">
+   <el-dialog 
+     :title="title" 
+     :before-close="onClose" 
+     @update:visible='dialogVisible = $event'
+     :visible="dialogVisible" >
 
       <h4> タイトルベースの類似質問 </h4>
       <li v-for="(text, index) in info.titleBase">

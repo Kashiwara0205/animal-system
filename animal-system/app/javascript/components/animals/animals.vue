@@ -7,8 +7,10 @@
           <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> 
 
           <search-panel 
-             v-bind:query.sync="query"
-             v-bind:offset.sync="offset"
+             :query="query"
+             @update:query='query = $event'
+             :offset="offset"
+             @update:offset='offset = $event'
              @search="fetchInfo"
             :animal-type-list = "animalTypeList"
             :countory-list = "countoryList">
@@ -23,7 +25,8 @@
             :animalTypeList = "animalTypeList"
             :countoryList = "countoryList"
             :total = "total"
-            v-bind:offset.sync="offset">
+            :offset="offset"
+            @update:offset='offset = $event'>
           </list-panel>
         </div>
       </el-tab-pane>

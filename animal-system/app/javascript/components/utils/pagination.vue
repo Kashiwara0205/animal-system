@@ -5,7 +5,8 @@
       layout="prev, pager, next"
       @current-change="currentChange"
       :page-size="50"
-      :current-page.sync="currentPage"
+      @update:currentPage='currentPage = $event'
+      :current-page="currentPage"
       :total="total">
     </el-pagination>
   </div>

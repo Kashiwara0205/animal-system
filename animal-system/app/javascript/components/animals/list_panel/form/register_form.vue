@@ -1,7 +1,11 @@
 
 <template>
   <span>
-    <el-dialog title="動物追加フォーム" :before-close="onClose" :visible.sync="registerFormVisible">
+    <el-dialog 
+      title="動物追加フォーム" 
+      :before-close="onClose" 
+      @update:visible='registerFormVisible = $event'
+      :visible="registerFormVisible" >
       <el-form :model="form" :rules="rules" ref="form" >
       
         <el-form-item label="動物名" prop="name">

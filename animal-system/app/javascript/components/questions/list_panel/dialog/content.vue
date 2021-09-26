@@ -2,7 +2,8 @@
   <div>
     <el-dialog
       title="質問内容"
-      :visible.sync="dialogVisible"
+      @update:visible='dialogVisible = $event'
+      :visible="dialogVisible"
       width="50%"
       :before-close="onClose">
       <p> 質問者: {{memberName}}</p>

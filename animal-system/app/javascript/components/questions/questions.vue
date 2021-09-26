@@ -7,9 +7,11 @@
           <h1 class="title"> <i class="el-icon-document"></i> {{ title }} </h1> 
 
           <search-panel 
-             v-bind:query.sync="query"
-             v-bind:offset.sync="offset"
-             @search="fetchInfo"
+            @update:query='query = $event'
+            :query="query"
+            @update:offset='offset = $event'
+            :offset="offset"
+            @search="fetchInfo"
             :phase-list = "phaseList">
           </search-panel>
 
@@ -20,7 +22,8 @@
             :loading = "loading"
             :total = "total"
             :phase-list = "phaseList"
-            v-bind:offset.sync="offset">
+            @update:offset='offset = $event'
+            :offset="offset">
           </list-panel>
         </div>
       </el-tab-pane>

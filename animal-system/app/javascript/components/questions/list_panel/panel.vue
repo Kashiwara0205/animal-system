@@ -4,7 +4,13 @@
       <el-tab-pane>
         <span slot="label"><i class="el-icon-document"></i> 一覧表示</span>
 
-        <pagination v-bind:offset.sync="paginationOffset" :total="total" @fetchInfo="fetchInfo" disp-message> </pagination>
+        <pagination 
+          @update:offset='paginationOffset = $event'
+          :offset="paginationOffset"
+          :total="total"
+          @fetchInfo="fetchInfo" 
+          disp-message> 
+        </pagination>
 
         <list :info="info" 
               :phase-list="phaseList"
