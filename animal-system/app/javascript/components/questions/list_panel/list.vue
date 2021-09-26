@@ -25,7 +25,7 @@
       <el-table-column label="質問者" prop="member_name"></el-table-column>
       <el-table-column label="タイトル" prop="title" :formatter="formatTitleEl"></el-table-column>
       <el-table-column label="質問内容" prop="content">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-link type="primary" @click="onClickContentLink(scope.row)">
             {{formatContent(scope.row.content)}}
           </el-link>
@@ -35,7 +35,7 @@
       <el-table-column label="質問日時" prop="created_at" :formatter="formatDatetimeEl"></el-table-column>
       <el-table-column label="最終対応日時" prop="updated_at" :formatter="formatDatetimeEl" ></el-table-column>
       <el-table-column label="操作" align="center" width="150px"> 
-        <template slot-scope="scope">
+        <template v-slot="scope">
            <el-button size="small" @click="onClickSimilarQuestion(scope.row)">類似質問</el-button>
         </template>
       </el-table-column>

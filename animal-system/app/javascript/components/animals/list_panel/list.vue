@@ -23,7 +23,7 @@
       style="width: 100%;">
 
       <el-table-column label="動物名">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <animal-name
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
@@ -35,7 +35,7 @@
       </el-table-column>
 
       <el-table-column label="種類">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <animal-type 
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
@@ -49,7 +49,7 @@
       </el-table-column>
 
       <el-table-column label="原産国">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <countory 
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
@@ -63,7 +63,7 @@
       </el-table-column>
 
       <el-table-column label="体重">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <weight
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
@@ -76,7 +76,7 @@
       </el-table-column>
 
       <el-table-column label="身長"> 
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <height
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
@@ -89,7 +89,7 @@
       </el-table-column>
 
       <el-table-column label="体毛">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <hair 
             :id="scope.row.id"
             :url="animalModel.getUpdateUrl()"
@@ -105,7 +105,7 @@
       <el-table-column label="登録日時" prop="created_at" :formatter="formatDatetimeEl"> </el-table-column>
       <el-table-column label="更新日時" prop="updated_at" :formatter="formatDatetimeEl"> </el-table-column>
       <el-table-column label="操作" width="150px"> 
-        <template slot-scope="scope">
+        <template v-slot="scope">
            <el-button size="small" @click="onClickEditBtn(scope.$index, scope.row)">編集</el-button>
            <delete-btn :id="scope.row.id" :name="scope.row.name" :url="animalModel.getUpdateUrl()"
                        @complete="fetchInfo">
