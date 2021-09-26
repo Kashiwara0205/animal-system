@@ -4,6 +4,13 @@
       <i class="el-icon-news"></i> 更新履歴
     </h3>
     <el-tabs :tab-position="tabPosition" style="height: 80vh;" type="border-card">
+      <el-tab-pane label="2021-09" class="panel" >
+        <b> 09月26日 </b>
+        <li> Vue3にバージョンアップさせるために、slot-scopeと.syncを削除 </li>
+        <br> これらの対応以外に、ライブラリであるelementをelement plusに変更する必要あり
+        <br> しかし、現時点でelement plusの公式サイトに404が出ており情報が得られない
+        <br> 時間をあけてから再度調査
+      </el-tab-pane>
       <el-tab-pane label="2021-08" class="panel" >
         <b> 08月07日 </b>
         <li> ActiveRecordConverterを実装 </li>
