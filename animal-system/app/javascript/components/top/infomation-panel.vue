@@ -9,6 +9,7 @@
         <li> 調査の結果以下の対応が必要だと判明</li>
         <br> Vue3にバージョンアップさせるにはelement-uiからelement-plusに対応させる必要 
         <br> それにプラスしてvue-property-decoratorをすべて剥がさないとならない
+        <br> 剥がす時は子供から剥がすこと(親から剥がしていくと意図しない挙動になった)
       </el-tab-pane>
       <el-tab-pane label="2021-09" class="panel" >
         <b> 09月26日 </b>

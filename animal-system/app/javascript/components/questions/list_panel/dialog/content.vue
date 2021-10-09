@@ -19,21 +19,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
+export default {
+  props:{
+    memberName: String,
+    title: String,
+    content: String,
+    dialogVisible: Boolean
+  },
 
-@Component
-export default class ContentDialog extends Vue {
-  @Prop({ required: true }) memberName
-  @Prop({ required: true }) title
-  @Prop({ required: true }) content
-  @Prop({ required: true }) dialogVisible
+  methods:{
+    onClose: function(){
+      this.$emit("update:dialogVisible", false)
+    },
 
-  private onClose(){
-    this.$emit("update:dialogVisible", false)
-  }
-
-  private fomrtHTML(content){
-    return content.replace("\n", "<br>")
+    fomrtHTML: function(content){
+      return content.replace("\n", "<br>")
+    }
   }
 }
 </script>
