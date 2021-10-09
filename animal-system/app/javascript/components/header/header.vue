@@ -44,15 +44,12 @@
 </template>
 
 <script lang="ts">
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import { Component, Vue, Prop } from 'vue-property-decorator';
-
-Vue.use(ElementUI);
-
-@Component
-export default class Header extends Vue {
-  handleSelect(url) { window.location.href =　url }
+export default {
+  methods:{
+    handleSelect: function (url) { 
+      window.location.href = url
+    }
+  }
 }
 </script>
 
