@@ -45,36 +45,39 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
-import ElementUI from 'element-ui';
 import { createQueryForm } from "../../../lib/utils/form_builder/question"
-import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(ElementUI);
+export default {
+  props:{
+    phaseList: Array
+  },
 
-@Component
-export default class SearchPanel extends Vue {
-  @Prop({ required: true }) phaseList
+  data(){
+    return {
+      query: createQueryForm()
+    }
+  },
 
-  private query = createQueryForm()
+  methods:{
 
-  onSearch(){
-    this.updateParentQuery()
+    onSearch: function(){
+      this.updateParentQuery()
 
-    this.$emit('update:offset', 0)
-    this.$emit("search")
-  }
+      this.$emit('update:offset', 0)
+     this.$emit("search")
+    },
 
-  onClear(){
-    this.query = createQueryForm()
-    this.updateParentQuery()
+    onClear: function(){
+      this.query = createQueryForm()
+      this.updateParentQuery()
 
-    this.$emit('update:offset', 0)
-    this.$emit("search")
-  }
+      this.$emit('update:offset', 0)
+      this.$emit("search")
+    },
 
-  updateParentQuery(){
-    this.$emit(`update:query`, this.query)
+    updateParentQuery: function(){
+      this.$emit(`update:query`, this.query)
+    }
   }
 }
 </script>
