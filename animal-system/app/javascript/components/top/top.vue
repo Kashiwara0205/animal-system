@@ -1,21 +1,24 @@
 <template>
   <div id="base">
     <h1> <i class="el-icon-s-tools"></i> {{ title }}</h1>
-    <infomation-panel></infomation-panel>
+    <info-mation-panel></info-mation-panel>
     <br>
     ※ 新機能や設計の実験用に開発している架空の企業の社内システムです
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
 import InfoMationPanel from "../top/infomation-panel.vue"
 
-@Component({
-  components:{ "infomation-panel": InfoMationPanel }
-})
-export default class Top extends Vue {
-  private title = "動物事業管理システム"
+export default {
+  components:{ 
+    InfoMationPanel 
+  },
+  data(){
+    return {
+      title: "動物事業管理システム"
+    }
+  }
 }
 </script>
 

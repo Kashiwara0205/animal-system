@@ -98,15 +98,12 @@
 </template>
 
 <script lang="ts">
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import { Component, Vue } from 'vue-property-decorator';
-
-Vue.use(ElementUI);
-
-@Component
-export default class InfomationPanel extends Vue {
-  private tabPosition = "left"
+export default {
+  data(){
+    return {
+      tabPosition: "left"
+    }
+  }
 }
 </script>
 
