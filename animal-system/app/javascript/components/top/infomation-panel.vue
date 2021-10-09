@@ -4,6 +4,12 @@
       <i class="el-icon-news"></i> 更新履歴
     </h3>
     <el-tabs :tab-position="tabPosition" style="height: 80vh;" type="border-card">
+      <el-tab-pane label="2021-10" class="panel" >
+        <b> 10月09日 </b>
+        <li> 調査の結果以下の対応が必要だと判明</li>
+        <br> Vue3にバージョンアップさせるにはelement-uiからelement-plusに対応させる必要 
+        <br> それにプラスしてvue-property-decoratorをすべて剥がさないとならない
+      </el-tab-pane>
       <el-tab-pane label="2021-09" class="panel" >
         <b> 09月26日 </b>
         <li> Vue3にバージョンアップさせるために、slot-scopeと.syncを削除 </li>
